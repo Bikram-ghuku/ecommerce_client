@@ -1,0 +1,17 @@
+.formFlex{
+    height: 90vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formArea{
+    text-align: left;
+    height: 25vh;
+    width: 30vw;
+}
+
+.form-group{
+    padding-bottom: 2vh;
+}
