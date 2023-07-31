@@ -28,7 +28,7 @@ function Login() {
       }
     })
     const data = await response.json();
-    setAccount(data.name)
+    data.code!=='ok' ? alert(data.code):setAccount(data.name)
 
   }
   return (

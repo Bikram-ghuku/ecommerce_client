@@ -26,7 +26,7 @@ function Register() {
             }
         })
         const data = await response.json();
-        console.log(data);
+        if(data.code!=='ok') alert(data.code);
     }
 
     return (
