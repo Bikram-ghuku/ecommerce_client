@@ -6,7 +6,8 @@ import './css/Login.css'
 function Register() {
     const [form, setForm] = useState({
         email: '',
-        pswd: ''
+        pswd: '',
+        name: ''
     });
 
     const handleInp = (e) =>{
@@ -17,7 +18,7 @@ function Register() {
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
-        const response = await fetch('localhost:8080/register',{
+        const response = await fetch('http://localhost:8080/register',{
             method: "POST",
             body: JSON.stringify(form),
             headers:{
@@ -35,16 +36,21 @@ function Register() {
                 <h2>Register Form</h2>
                 <div className='formArea'>
                     <form onSubmit={handleSubmit}>
-                        <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" onChange={handleInp}/>
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        <div className='form-goup'>
+                            <label for="exampleInputPassword1">Name</label>
+                            <input type="text" className="form-control" id="name" placeholder="Enter your name" onChange={handleInp}/>
                         </div>
-                        <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="pswd" placeholder="Password" onChange={handleInp}/>
+                        <br/>
+                        <div className="form-group">
+                            <label for="InputEmail">Email address</label>
+                            <input type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" onChange={handleInp}/>
+                            <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
-                        <button type="submit" class="btn btn-primary">Register</button>
+                        <div className="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" className="form-control" id="pswd" placeholder="Password" onChange={handleInp}/>
+                        </div>
+                        <button type="submit" className="btn btn-primary">Register</button>
                         <br/>
                         <label className='info-box'>Already have an account? <Link to="/login">Login</Link></label>
                     </form>
