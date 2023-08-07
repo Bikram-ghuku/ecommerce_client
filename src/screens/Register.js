@@ -4,6 +4,8 @@ import Navbar from '../components/Navbar'
 import './css/Login.css'
 
 function Register() {
+
+    const [errMsg, setMsg] = useState('');
     const [form, setForm] = useState({
         email: '',
         pswd: '',
@@ -16,6 +18,7 @@ function Register() {
         })
     }
 
+    
     const handleSubmit = async (e) =>{
         e.preventDefault();
         const response = await fetch('http://localhost:8080/register',{
@@ -26,7 +29,7 @@ function Register() {
             }
         })
         const data = await response.json();
-        if(data.code!=='ok') alert(data.code);
+        data.code!=='ok' ?  setMsg(data.code) : setMsg("Register Successful")
     }
 
     return (
@@ -50,7 +53,9 @@ function Register() {
                             <label for="exampleInputPassword1">Password</label>
                             <input type="password" className="form-control" id="pswd" placeholder="Password" onChange={handleInp}/>
                         </div>
-                        <button type="submit" className="btn btn-primary">Register</button>
+                        <font color='red'>{errMsg}</font>
+                        <br/>
+                            <button type="submit" className="btn btn-primary">Register</button>
                         <br/>
                         <label className='info-box'>Already have an account? <Link to="/login">Login</Link></label>
                     </form>

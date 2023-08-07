@@ -5,6 +5,7 @@ import './css/Login.css'
 import { AccountContext } from '../context/AccountProvider';
 
 function Login() {
+  const [errMsg, setMsg] = useState();
   const [form, setForm] = useState({
       email: '',
       pswd: ''
@@ -28,7 +29,13 @@ function Login() {
       }
     })
     const data = await response.json();
-    data.code!=='ok' ? alert(data.code):setAccount(data.name)
+    if(data.code!=='ok'){
+      setMsg(data.code);
+    }
+    else{
+      setAccount(data.name);
+      setMsg("Login successful")
+    }
 
   }
   return (
@@ -38,16 +45,19 @@ function Login() {
           <h2>Login Form</h2>
           <div className='formArea'>
           <form onSubmit={handleSubmit}>
-                <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" onChange={handleInp}/>
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <div className="form-group">
+                <label>Email address</label>
+                <input type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" onChange={handleInp}/>
+                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="pswd" placeholder="Password" onChange={handleInp}/>
+            <div className="form-group">
+              <label >Password</label>
+              <input type="password" className="form-control" id="pswd" placeholder="Password" onChange={handleInp}/>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <div className='form-group'>
+              {errMsg}
+            </div>
+            <button type="submit" className="btn btn-primary">Login</button>
             <br/>
             <label className='info-box'>Don't have an account? <Link to="/register">Click Here</Link></label>
           </form>
