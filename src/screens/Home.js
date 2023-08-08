@@ -1,5 +1,6 @@
 import React, {useContext, useState} from 'react'
 import Navbar from '../components/Navbar'
+import Cookies from 'universal-cookie/cjs/Cookies';
 import { AccountContext } from '../context/AccountProvider';
 import "./css/home.css"
 
@@ -7,8 +8,10 @@ function Home() {
   const {account} = useContext(AccountContext);
   const [respitem, setResitem] = useState([]);
   var res;
-  if(account!==''){
-    res = "Welcome "+account;
+  var cookie = new Cookies();
+  var accCookie = cookie.get('uname');
+  if(account!=='' || accCookie){
+    res = account!=='' ? "Welcome "+account : "Welcome "+ accCookie;
     fetch('http://localhost:8080/items', {method: "GET"})
     .then(response => response.json())
     .then(data => setResitem(data))
@@ -33,7 +36,7 @@ function Home() {
                   <li key={optIndex} className='list-group-item'>{optItem}</li>
                 ))}
               </ul>
-              <a href={items._id} className='btn btn-primary'>Add to ShoppingCart</a>
+              <a href={"addCart/"+items._id} className='btn btn-primary'>Add to ShoppingCart</a>
             </div>
           </div>
         ))}

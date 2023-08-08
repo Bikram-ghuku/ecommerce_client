@@ -1,13 +1,16 @@
 import React, {useContext, useState} from 'react'
 import Navbar from '../components/Navbar'
+import Cookies from 'universal-cookie/cjs/Cookies';
 import { AccountContext } from '../context/AccountProvider';
 
 function ShoppingCart() {
     const {account} = useContext(AccountContext);
     const [items, setItems]  = useState([]);
     var res;
-    if(account!==''){
-      res = "Welcome "+account;  
+    var cookie = new Cookies();
+    var accCookie = cookie.get('uname');
+    if(account!=='' || accCookie){
+      res = account!=='' ? "Welcome "+account : "Welcome "+ accCookie; 
       fetch("http://localhost:8080/items", {
           method: "GET"
         })
