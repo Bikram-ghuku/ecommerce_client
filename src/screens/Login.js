@@ -35,10 +35,11 @@ function Login() {
       setMsg(data.code);
     }
     else{
-      setAccount(data.name);
+      setAccount({"Uname":data.name, "type": data.type});
       if(remMe){
         const cookie = new Cookies();
         cookie.set('uname', data.name, {path: "/"})
+        cookie.set('type', data.type, {path: "/"})
       }
       setMsg("Login successful")
     }
@@ -53,6 +54,7 @@ function Login() {
   return (
       <div>
           <Navbar/>
+          
           <div className='formFlex'>
           <h2>Login Form</h2>
           <div className='formArea'>

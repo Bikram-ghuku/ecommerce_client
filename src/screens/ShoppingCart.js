@@ -9,8 +9,8 @@ function ShoppingCart() {
     var res;
     var cookie = new Cookies();
     var accCookie = cookie.get('uname');
-    if(account!=='' || accCookie){
-      res = account!=='' ? "Welcome "+account : "Welcome "+ accCookie; 
+    if(account.Uname || accCookie){
+      res = account.Uname ? "Welcome "+account.Uname : "Welcome "+ accCookie; 
       fetch("http://localhost:8080/items", {
           method: "GET"
         })

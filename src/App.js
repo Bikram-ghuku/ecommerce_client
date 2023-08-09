@@ -6,6 +6,7 @@ import Register from './screens/Register';
 import AccountProvider from './context/AccountProvider';
 import ShoppingCart from './screens/ShoppingCart';
 import AddCart from './components/AddCart';
+import SellerAcc from './screens/SellerAcc';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
               <Route exact path='/register' element={<Register/>}/>
               <Route exact path='/shoppingCart' element={<ShoppingCart/>}/>
               <Route exact path='/addCart/:itemId' element={<AddCart/>} />
+              <Route exact path='/register/Seller' element={<SellerAcc/>}/>
             </Routes>
             </AccountProvider>
       </div>

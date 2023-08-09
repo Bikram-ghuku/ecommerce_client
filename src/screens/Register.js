@@ -9,7 +9,8 @@ function Register() {
     const [form, setForm] = useState({
         email: '',
         pswd: '',
-        name: ''
+        name: '',
+        type: 'user'
     });
 
     const handleInp = (e) =>{
