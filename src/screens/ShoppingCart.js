@@ -11,11 +11,15 @@ function ShoppingCart() {
     var accCookie = cookie.get('uname');
     if(account.Uname || accCookie){
       res = account.Uname ? "Welcome "+account.Uname : "Welcome "+ accCookie; 
-      fetch("http://localhost:8080/items", {
-          method: "GET"
+      fetch("http://localhost:8080/cartItems", {
+          method: "POST",
+          body: JSON.stringify({id: localStorage.getItem("accId")}),
+          headers:{
+            'Content-Type': 'application/json'
+          }
         })
         .then(response => response.json())
-        .then(data => setItems(data))
+        .then(data => setItems(data ))
         .catch(err => console.log(err))
     }
     else{

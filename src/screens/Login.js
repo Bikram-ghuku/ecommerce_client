@@ -35,6 +35,7 @@ function Login() {
       setMsg(data.code);
     }
     else{
+      localStorage.setItem("accId", data.id)
       setAccount({"Uname":data.name, "type": data.type});
       if(remMe){
         const cookie = new Cookies();
