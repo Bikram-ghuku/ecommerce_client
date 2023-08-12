@@ -69,9 +69,9 @@ function Login() {
               <label >Password</label>
               <input type="password" className="form-control" id="pswd" placeholder="Password" onChange={handleInp}/>
             </div>
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="reMe" onChange={handleSave}/>
-                <label class="form-check-label" for="exampleCheck1">Remember me</label>
+            <div className="form-group form-check">
+                <input type="checkbox" className="form-check-input" id="reMe" onChange={handleSave}/>
+                <label className="form-check-label">Remember me</label>
             </div>
             <div className='form-group'>
               {errMsg}

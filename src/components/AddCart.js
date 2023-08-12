@@ -1,5 +1,5 @@
 import React from 'react'
-import { redirect, useParams } from 'react-router-dom';
+import { Link, redirect, useParams } from 'react-router-dom';
 import Navbar from './Navbar'
 
 
@@ -18,7 +18,8 @@ function AddCart() {
   return(
     <>
       <Navbar/>
-      Successfully Added to cart
+      <h1>Successfully Added to cart</h1>
+      <Link to='/ShoppingCart'>Goto Cart</Link>
     </>
   )
 

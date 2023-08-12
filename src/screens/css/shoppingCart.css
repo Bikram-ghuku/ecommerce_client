@@ -1,0 +1,86 @@
+body{
+    background-color: #dbdee1;
+}
+
+.hRule{
+    outline: solid #f6f6f6;
+    width: 90%;
+}
+
+.sep{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.mainDiv{
+    height: 86vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.backDiv{
+    height: 80vh;
+    width: 80vw;
+    background-color: #ffffff;
+    box-shadow: 5px 10px 18px #888888;
+    display: flex;
+    flex-direction: row;
+}
+
+.itemsDiv{
+    width: 55vw;
+    height: 80vh;
+}
+
+.totDiv{
+    background-color: #f6f6f6;
+    width: 25vw;
+    height: 80vh;
+}
+
+.titleDiv{
+    width: 55vw;
+    padding-left: 2vw;
+    display: flex;
+    flex-direction: row;
+    height: 10vh;
+    justify-content: center;
+    padding-right: 2vw;
+}
+
+.lTitle{
+    display: flex;
+    align-items: center;
+    height: 10vh;
+    text-align: left;
+    width: 25vw;
+}
+
+.rTitle{
+    display: flex;
+    align-items: center;
+    width: 25vw;
+    text-align: right;
+    justify-content: end;
+}
+
+.itemListCont{
+    padding-top: 5vh;
+}
+
+
+.itemsList{
+    padding-left: 3vw;
+    height: 60vh;
+    width: 53vw;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.itemsFooter{
+    padding-top: 1vh;
+    padding-left: 2vw;
+    text-align: left;
+}

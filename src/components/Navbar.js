@@ -38,7 +38,7 @@ function Navbar() {
           <Link className='nav-link' to="/shoppingCart">
             <IconButton aria-label="cart">
               <Badge badgeContent={numItems} color="primary">
-                <i class="fas fa-shopping-cart"></i>
+                <i className="fas fa-shopping-cart"></i>
               </Badge>
             </IconButton>
           </Link>
