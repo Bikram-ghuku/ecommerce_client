@@ -2,15 +2,37 @@ import React, { useContext, useState } from 'react'
 import {Link} from 'react-router-dom';
 import { AccountContext } from '../context/AccountProvider';
 import Cookies from 'universal-cookie/cjs/Cookies';
-import prof from "../prof.png"
-import { Avatar, IconButton, Badge } from '@mui/material';
+import { Avatar, IconButton, Badge, Menu, MenuItem, ListItemIcon, Tooltip, Paper } from '@mui/material';
+import Logout from '@mui/icons-material/Logout'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Settings } from '@mui/icons-material';
+
+
+function stringAvatar(name) {
+  return {
+    sx: {
+      bgcolor: "#0dcaf0",
+    },
+    children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+  };
+}
 
 function Navbar() {
+  const [anchorEl, setAnchor] = useState(null);
+
+  const handleClick = (e) =>{
+    setAnchor(e.currentTarget)
+  }
+
+  const handleClose = () =>{
+    setAnchor(null);
+  }
   const {account} = useContext(AccountContext);
   const [numItems, setNItems] = useState(0);
   var cookie = new Cookies();
   var accCookie = cookie.get('uname');
-  if(account.Uname || accCookie){
+  var accVar = account.Uname
+  if(accVar || accCookie){
     fetch("http://localhost:8080/cartItems", {
         method: "POST",
         body: JSON.stringify({id: localStorage.getItem("accId")}),
@@ -38,16 +60,39 @@ function Navbar() {
           <Link className='nav-link' to="/shoppingCart">
             <IconButton aria-label="cart">
               <Badge badgeContent={numItems} color="primary">
-                <i className="fas fa-shopping-cart"></i>
+                <Tooltip title="Open Cart"><ShoppingCartIcon/></Tooltip>
               </Badge>
             </IconButton>
           </Link>
           
         </li>
         <li className="nav-item">
-        <Link className="nav-link" to="/Login">{account.Uname || accCookie?  <Avatar src={prof} alt='user profile'/>  : "Login"}</Link>
+        {accVar || accCookie?  <Tooltip title="Account Settings">
+            <IconButton onClick={handleClick}>
+              <Avatar alt='user profile' {...stringAvatar(accVar ? accVar : accCookie)}/>
+            </IconButton>
+          </Tooltip>  
+          :
+           <Link className="nav-link" to="/Login">Login</Link>}
         </li>
       </ul>
+      <Paper style={{backgroundColor: "#0dcaf0"}}>
+        <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClick={handleClose} onClose={handleClose}>
+          <MenuItem>
+            <ListItemIcon>
+              <Settings fontSize='small'/>
+            </ListItemIcon>
+            Settings
+          </MenuItem>
+          <MenuItem>
+            <ListItemIcon>
+              <Logout fontSize="small" />
+            </ListItemIcon>
+            Logout
+          </MenuItem>
+          
+        </Menu>
+      </Paper>
     </div>
   </nav>
     )
