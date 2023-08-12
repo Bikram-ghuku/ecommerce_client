@@ -3,7 +3,7 @@ body{
 }
 
 .hRule{
-    outline: solid #f6f6f6;
+    outline: solid #f0f0f0;
     width: 90%;
 }
 
@@ -83,4 +83,63 @@ body{
     padding-top: 1vh;
     padding-left: 2vw;
     text-align: left;
+}
+
+.ltitleDiv{
+    padding-left: 2vw;
+    padding-top: 3vh;
+    width: 25vw;
+    height: 10vh;
+    text-align:left;
+}
+
+.totDet{
+    display: flex;
+    align-items: center;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    width: 25vw;
+    height: 10vh;
+}
+
+.totDetA{
+    width: 10vw;
+    float: left;
+    text-align: left;
+}
+
+.totDetB{
+    width: 10vw;
+    float: right;
+    text-align: right;
+}
+
+.promoCode{
+    padding-left: 2vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 25vw;
+    height: 40vh;
+}
+
+.pcTitle{
+    justify-content: center;
+    text-align: left;
+    width: 25vw;
+    height: 5vh;
+}
+
+.pcInp{
+    padding-right: 3vw;
+}
+
+.pcInpF{
+    width: 20vw;
+
+}
+
+.shipInp{
+    width: 20vw;
+    padding-bottom: 8vh;
 }

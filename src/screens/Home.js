@@ -26,8 +26,8 @@ function Home() {
       <h1>{res}</h1>
       <div className='itemsCont'>
         {respitem.map((items, index) => (
-          <div className='card' style={{"width" : "18rem"}}>
-            <img src={items.img} className='card-img-top' alt={items.pdtName}/>
+          <div className='card' style={{width : "18rem", display: "flex", justifyContent: "center", alignItems:"center"}}>
+            <img src={items.img} className='card-img-top' alt={items.pdtName} style={{height:"10vh", width: "10vw"}}/>
             <div className='card-body'>
               <h5 className='card-title text-center'>{items.pdtName}</h5>
               <p className='card-text'>{items.desc}</p>
@@ -36,6 +36,7 @@ function Home() {
                   <li key={optIndex} className='list-group-item'>{optItem}</li>
                 ))}
               </ul>
+              <p className='card-text'><h5>{'$'+items.cost}</h5></p>
               <a href={"addCart/"+items._id} className='btn btn-primary'>Add to ShoppingCart</a>
             </div>
           </div>

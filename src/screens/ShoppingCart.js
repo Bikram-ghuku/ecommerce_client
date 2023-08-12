@@ -4,11 +4,15 @@ import Cookies from 'universal-cookie/cjs/Cookies';
 import { AccountContext } from '../context/AccountProvider';
 import './css/shoppingCart.css'
 import { Link } from 'react-router-dom';
+import { FormControl, InputLabel, Select, TextField } from '@mui/material';
 
 function ShoppingCart() {
+
+    const [isHidden, setHidden] = useState(false);
     const {account} = useContext(AccountContext);
     const [items, setItems]  = useState([]);
     var res;
+    var totItems, totSum = 0;
     var cookie = new Cookies();
     var accCookie = cookie.get('uname');
     if(account.Uname || accCookie){
@@ -27,12 +31,18 @@ function ShoppingCart() {
     else{
         res = "Please Login to continue";
     }
+    
+    totItems = items.length
+    for(var i = 0; i < totItems; i++){
+      totSum+=parseInt(items[i].cost)
+    }
+
 
     return (
         <>
             <Navbar/>
             <h1>{res}</h1>
-            <div className='mainDiv'>
+            <div className='mainDiv' hidden={isHidden}>
                 <div className='backDiv'>
                     <div className='itemsDiv'>
                       <div className='titleDiv'>
@@ -54,10 +64,10 @@ function ShoppingCart() {
                             </thead>
                             <tbody>
                             {items.map((itemD, index)=>(
-                              <tr>
+                              <tr key={index}>
                                 <td>{index + 1}</td>
                                 <td>{itemD.pdtName}</td>
-                                <td>{itemD.cost}</td>
+                                <td>{"$"+itemD.cost}</td>
                               </tr>
                             ))}
                             </tbody>
@@ -69,6 +79,36 @@ function ShoppingCart() {
                       </div>
                     </div>
                     <div className='totDiv'>
+                      <div className='ltitleDiv'>
+                        <h3>Order Summary</h3>
+                      </div>
+                      <div className='sep'>
+                        <div className='hRule'></div>
+                      </div>
+                      <div className='totDet'>
+                        <div className='totDetA'>
+                            <h5>ITEMS {totItems}</h5>
+                        </div>
+                        <div className='totDetB'>
+                          <h5>{"$"+totSum}</h5>
+                        </div>
+                      </div>
+                      <div className='promoCode'>
+                        <div className='pcTitle'><h5>SHIPPING ADDRESS</h5></div>
+                        <div className='shipInp'>
+                          <FormControl style={{width: "20vw"}}>
+                            <InputLabel id="shipAddLabel">Shipping Address</InputLabel>
+                            <Select label='Select address' labelId='shipAddLabel'></Select>
+                          </FormControl>
+                        </div>
+                        <div className='pcTitle'><h5>PROMO CODE</h5></div>
+                        <div className='pcInp'>
+                          <TextField variant='outlined' label="Enter promo code" className='pcInpF'/>
+                        </div>
+                      </div>
+                      <div className='sep'>
+                        <div className='hRule'></div>
+                      </div>
                     </div>
                 </div>
             </div>
