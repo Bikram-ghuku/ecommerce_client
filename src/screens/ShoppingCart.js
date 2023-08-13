@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom';
 import { FormControl, InputLabel, Select, TextField } from '@mui/material';
 
 function ShoppingCart() {
-
-    const [isHidden, setHidden] = useState(false);
+    const [promoCode, setPromoCode] = useState();
+    const [discount, setDiscount] = useState(0);
     const {account} = useContext(AccountContext);
     const [items, setItems]  = useState([]);
     var res;
@@ -37,12 +37,24 @@ function ShoppingCart() {
       totSum+=parseInt(items[i].cost)
     }
 
+    const handlePCChange = (e) =>{
+      setPromoCode(e.target.value)
+    }
+
+    const applyPC = () =>{
+      if(promoCode === "69420"){
+        setDiscount(2000);
+      }
+      else{
+        setDiscount(0);
+      }
+    }
 
     return (
         <>
             <Navbar/>
             <h1>{res}</h1>
-            <div className='mainDiv' hidden={isHidden}>
+            <div className='mainDiv'>
                 <div className='backDiv'>
                     <div className='itemsDiv'>
                       <div className='titleDiv'>
@@ -103,11 +115,23 @@ function ShoppingCart() {
                         </div>
                         <div className='pcTitle'><h5>PROMO CODE</h5></div>
                         <div className='pcInp'>
-                          <TextField variant='outlined' label="Enter promo code" className='pcInpF'/>
+                          <TextField variant='outlined' label="Enter promo code" className='pcInpF' onChange={handlePCChange}/>
+                        </div>
+                        <div className='applyPCBtn'>
+                          <button className='btn btn-primary' onClick={applyPC}>APPLY</button>
                         </div>
                       </div>
                       <div className='sep'>
                         <div className='hRule'></div>
+                      </div>
+                      <div className='finalCheck'>
+                          <div className='finalAmtL'><h5>TOTAL COST</h5></div>
+                          <div className='finalAmtR'><h5>${totSum > discount ? totSum - discount : totSum}</h5></div>
+                          <div className='checkOutBtn'>
+                            <button className='btn btn-secondary' style={{width: "100%", backgroundColor:"#1e2f97"}}>
+                              <h5>CHECKOUT</h5>
+                            </button>
+                          </div>
                       </div>
                     </div>
                 </div>

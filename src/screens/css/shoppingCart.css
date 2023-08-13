@@ -120,7 +120,7 @@ body{
     justify-content: center;
     flex-direction: column;
     width: 25vw;
-    height: 40vh;
+    height: 45vh;
 }
 
 .pcTitle{
@@ -143,3 +143,30 @@ body{
     width: 20vw;
     padding-bottom: 8vh;
 }
+
+.applyPCBtn{
+    padding-top: 2vh;
+    align-self: self-start;
+}
+
+.finalCheck{
+    padding-top: 2vh;
+    height: 15vh;
+    padding-left: 2vw;
+    padding-right: 2vw;
+}
+
+.finalAmtL{
+    text-align: left;
+    height: 5vh;
+    width: 10vw;
+    float: left;
+}
+
+.finalAmtR{
+    text-align: right;
+    height: 5vh;
+    width: 10vw;
+    float: right;
+}
+
