@@ -2,7 +2,6 @@ import React, {useContext, useState} from 'react'
 import Navbar from '../components/Navbar'
 import Cookies from 'universal-cookie/cjs/Cookies';
 import { AccountContext } from '../context/AccountProvider';
-import "./css/home.css"
 import { Link } from 'react-router-dom';
 
 function Home() {
@@ -42,6 +41,8 @@ function Home() {
                 </ul>
                 <p className='card-text'><h5>{'₹'+items.cost}</h5></p>
                 <Link to={"addCart/"+items._id} className='btn btn-primary'>Add to ShoppingCart</Link>
+                <br/>
+                <p className='card-text'>Seller: {items.seller}</p>
               </div>
             </div>
             <br/>
