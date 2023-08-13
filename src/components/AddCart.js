@@ -1,6 +1,7 @@
 import React from 'react'
-import { Link, redirect, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Navbar from './Navbar'
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 
 function AddCart() {
@@ -18,8 +19,18 @@ function AddCart() {
   return(
     <>
       <Navbar/>
-      <h1>Successfully Added to cart</h1>
-      <Link to='/ShoppingCart'>Goto Cart</Link>
+      <div style={{display:"flex", justifyContent: "center", alignItems:"center", height:"90vh", flexDirection:"column"}}>
+        <div style={{borderRadius:"2vh", outline: "solid #989898", backgroundColor: "#ffffff"}}>
+          <div style={{height: "20vh", width:"40vw", backgroundColor: "#4ded80"}}>
+            <br/><br/>
+            <CheckCircleOutlineIcon fontSize='large'/>
+            <h5>Successfully Added to cart</h5>
+          </div>
+          <br/><br/>
+          <Link to='/ShoppingCart'><button className='btn btn-success'>Goto Cart</button></Link>
+          <br/><br/>
+        </div>
+      </div>
     </>
   )
 
