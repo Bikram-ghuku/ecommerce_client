@@ -1,8 +1,0 @@
-.itemsCont{
-    width: 100vw;
-    display: flex;
-    flex-direction: row;
-    column-gap: 2vh;
-    overflow-x: hidden;
-    overflow-y: auto;
-}

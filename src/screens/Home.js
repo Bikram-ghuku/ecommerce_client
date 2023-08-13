@@ -25,21 +25,26 @@ function Home() {
     <>
       <Navbar/>
       <h1>{res}</h1>
-      <div className='itemsCont'>
+      <div className='itemsCont card-columns'>
         {respitem.map((items, index) => (
-          <div className='card' style={{width : "18rem", display: "flex", justifyContent: "center", alignItems:"center"}}>
-            <img src={items.img} className='card-img-top' alt={items.pdtName} style={{height:"10vh", width: "10vw"}}/>
-            <div className='card-body'>
-              <h5 className='card-title text-center'>{items.pdtName}</h5>
-              <p className='card-text'>{items.desc}</p>
-              <ul className='list-group list-group-flush'>
-                {items.opts.map((optItem, optIndex)=>(
-                  <li key={optIndex} className='list-group-item'>{optItem}</li>
-                ))}
-              </ul>
-              <p className='card-text'><h5>{'$'+items.cost}</h5></p>
-              <Link to={"addCart/"+items._id} className='btn btn-primary'>Add to ShoppingCart</Link>
+          <div className='cardParent' style={items.dispType=='normal' ? {width: "20vw", paddingLeft:"5vw", display:"inline-grid"} : {width:"95vw", paddingLeft:"5vw"}}>
+            <div className='card border-dark' style={{boxShadow:"5px 10px 18px #888888"}}>
+              <div className='card-header'>{items.pdtName}</div>
+              <br/>
+              <img src={items.img} className='card-img-top' alt={items.pdtName} style={{height:"10vh", width: "10vw", alignSelf:"center"}}/>
+              <div className='card-body'>
+                <h5 className='card-title text-center'>{items.pdtName}</h5>
+                <p className='card-text'>{items.desc}</p>
+                <ul className='list-group list-group-flush'>
+                  {items.opts.map((optItem, optIndex)=>(
+                    <li key={optIndex} className='list-group-item'>{optItem}</li>
+                  ))}
+                </ul>
+                <p className='card-text'><h5>{'₹'+items.cost}</h5></p>
+                <Link to={"addCart/"+items._id} className='btn btn-primary'>Add to ShoppingCart</Link>
+              </div>
             </div>
+            <br/>
           </div>
         ))}
       </div>

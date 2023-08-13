@@ -19,7 +19,7 @@ function AddCart() {
     <>
       <Navbar/>
       <div style={{display:"flex", justifyContent: "center", alignItems:"center", height:"90vh", flexDirection:"column"}}>
-        <div style={{borderRadius:"2vh", outline: "solid #989898", backgroundColor: "#ffffff"}}>
+        <div style={{borderRadius:"2vh", outline: "solid #989898", backgroundColor: "#ffffff", boxShadow:"5px 10px 18px #888888"}}>
           <div style={{height: "20vh", width:"40vw", backgroundColor: "#4ded80"}}>
             <br/><br/>
             <CheckCircleOutlineIcon fontSize='large'/>

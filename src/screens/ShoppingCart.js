@@ -79,7 +79,7 @@ function ShoppingCart() {
                               <tr key={index}>
                                 <td>{index + 1}</td>
                                 <td>{itemD.pdtName}</td>
-                                <td>{"$"+itemD.cost}</td>
+                                <td>{"₹"+itemD.cost}</td>
                               </tr>
                             ))}
                             </tbody>
@@ -102,7 +102,7 @@ function ShoppingCart() {
                             <h5>ITEMS {totItems}</h5>
                         </div>
                         <div className='totDetB'>
-                          <h5>{"$"+totSum}</h5>
+                          <h5>{"₹"+totSum}</h5>
                         </div>
                       </div>
                       <div className='promoCode'>
@@ -126,7 +126,7 @@ function ShoppingCart() {
                       </div>
                       <div className='finalCheck'>
                           <div className='finalAmtL'><h5>TOTAL COST</h5></div>
-                          <div className='finalAmtR'><h5>${totSum > discount ? totSum - discount : totSum}</h5></div>
+                          <div className='finalAmtR'><h5>₹{totSum > discount ? totSum - discount : totSum}</h5></div>
                           <div className='checkOutBtn'>
                             <button className='btn btn-secondary' style={{width: "100%", backgroundColor:"#1e2f97"}}>
                               <h5>CHECKOUT</h5>
