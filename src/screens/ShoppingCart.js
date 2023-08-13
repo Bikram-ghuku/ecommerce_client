@@ -17,7 +17,7 @@ function ShoppingCart() {
     var accCookie = cookie.get('uname');
     if(account.Uname || accCookie){
       res = account.Uname ? "Welcome "+account.Uname : "Welcome "+ accCookie; 
-      fetch("http://localhost:8080/cartItems", {
+      fetch(process.env.REACT_APP_SERVER_ADD+"cartItems", {
           method: "POST",
           body: JSON.stringify({id: localStorage.getItem("accId")}),
           headers:{

@@ -22,7 +22,7 @@ function Register() {
     
     const handleSubmit = async (e) =>{
         e.preventDefault();
-        const response = await fetch('http://localhost:8080/register',{
+        const response = await fetch(process.env.REACT_APP_SERVER_ADD+'register',{
             method: "POST",
             body: JSON.stringify(form),
             headers:{

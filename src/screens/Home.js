@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import Cookies from 'universal-cookie/cjs/Cookies';
 import { AccountContext } from '../context/AccountProvider';
 import "./css/home.css"
+import { Link } from 'react-router-dom';
 
 function Home() {
   const {account} = useContext(AccountContext);
@@ -12,7 +13,7 @@ function Home() {
   var accCookie = cookie.get('uname');
   if(account.Uname || accCookie){
     res = account.Uname ? "Welcome "+account.Uname : "Welcome "+ accCookie;
-    fetch('http://localhost:8080/items', {method: "GET"})
+    fetch(process.env.REACT_APP_SERVER_ADD+'items', {method: "GET"})
     .then(response => response.json())
     .then(data => setResitem(data))
     .catch(err => console.log(err))
@@ -37,7 +38,7 @@ function Home() {
                 ))}
               </ul>
               <p className='card-text'><h5>{'$'+items.cost}</h5></p>
-              <a href={"addCart/"+items._id} className='btn btn-primary'>Add to ShoppingCart</a>
+              <Link to={"addCart/"+items._id} className='btn btn-primary'>Add to ShoppingCart</Link>
             </div>
           </div>
         ))}

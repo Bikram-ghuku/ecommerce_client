@@ -23,7 +23,7 @@ function Login() {
 
   const handleSubmit = async (e) =>{
     e.preventDefault();
-    const response = await fetch('http://localhost:8080/login',{
+    const response = await fetch(process.env.REACT_APP_SERVER_ADD+"login",{
       method: "POST",
       body: JSON.stringify(form),
       headers:{

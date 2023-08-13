@@ -33,7 +33,7 @@ function Navbar() {
   var accCookie = cookie.get('uname');
   var accVar = account.Uname
   if(accVar || accCookie){
-    fetch("http://localhost:8080/cartItems", {
+    fetch(process.env.REACT_APP_SERVER_ADD+"cartItems", {
         method: "POST",
         body: JSON.stringify({id: localStorage.getItem("accId")}),
         headers:{

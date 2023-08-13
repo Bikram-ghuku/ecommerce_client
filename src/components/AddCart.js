@@ -6,8 +6,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 function AddCart() {
   const {itemId} = useParams();
-  console.log(itemId)
-  fetch('http://localhost:8080/addCartItems', {
+  fetch(process.env.REACT_APP_SERVER_ADD+"addCartItems", {
     method: "POST",
     body: JSON.stringify({"uid": localStorage.getItem('accId'), "pid": itemId}),
     headers:{
