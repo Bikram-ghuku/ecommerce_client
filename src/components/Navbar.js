@@ -85,10 +85,12 @@ function Navbar() {
             Settings
           </MenuItem>
           <MenuItem>
-            <ListItemIcon>
-              <Logout fontSize="small" />
-            </ListItemIcon>
-            Logout
+            <a href='/logout'>
+              <ListItemIcon>
+                <Logout fontSize="small" />
+              </ListItemIcon>
+              Logout
+            </a>
           </MenuItem>
           
         </Menu>

@@ -7,6 +7,7 @@ import AccountProvider from './context/AccountProvider';
 import ShoppingCart from './screens/ShoppingCart';
 import AddCart from './components/AddCart';
 import SellerAcc from './screens/SellerAcc';
+import LogOut from './screens/LogOut';
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
               <Route exact path='/register' element={<Register/>}/>
               <Route exact path='/shoppingCart' element={<ShoppingCart/>}/>
               <Route exact path='/addCart/:itemId' element={<AddCart/>} />
-              <Route exact path='/register/Seller' element={<SellerAcc/>}/>
+              <Route exact path='/registerSeller' element={<SellerAcc/>}/>
+              <Route exact path='/logout' element={<LogOut/>}/>
             </Routes>
             </AccountProvider>
       </div>

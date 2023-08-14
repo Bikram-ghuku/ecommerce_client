@@ -1,11 +1,12 @@
 import React, {useState, useContext} from 'react'
 import Cookies from 'universal-cookie/cjs/Cookies';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import Navbar from '../components/Navbar'
 import './css/Login.css'
 import { AccountContext } from '../context/AccountProvider';
 
 function Login() {
+  const navigate = useNavigate();
   const [errMsg, setMsg] = useState();
   const [remMe, setRemMe] = useState(false);
   const [form, setForm] = useState({
@@ -43,6 +44,7 @@ function Login() {
         cookie.set('type', data.type, {path: "/"})
       }
       setMsg("Login successful")
+      navigate('/')
     }
 
   }

@@ -26,7 +26,7 @@ function Home() {
       <h1>{res}</h1>
       <div className='itemsCont card-columns'>
         {respitem.map((items, index) => (
-          <div className='cardParent' style={items.dispType=='normal' ? {width: "20vw", paddingLeft:"5vw", display:"inline-grid"} : {width:"95vw", paddingLeft:"5vw"}}>
+          <div className='cardParent' style={items.dispType==='normal' ? {width: "20vw", paddingLeft:"5vw", display:"inline-grid"} : {width:"95vw", paddingLeft:"5vw"}}>
             <div className='card border-dark' style={{boxShadow:"5px 10px 18px #888888"}}>
               <div className='card-header'>{items.pdtName}</div>
               <br/>
