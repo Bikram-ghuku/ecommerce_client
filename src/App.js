@@ -1,7 +1,7 @@
 import './App.css';
 import Home from './screens/Home';
 import Login from './screens/Login';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Register from './screens/Register';
 import AccountProvider from './context/AccountProvider';
 import ShoppingCart from './screens/ShoppingCart';
