@@ -22,15 +22,18 @@ function Register() {
     
     const handleSubmit = async (e) =>{
         e.preventDefault();
-        const response = await fetch(process.env.REACT_APP_SERVER_ADD+"register",{
-            method: "POST",
-            body: JSON.stringify(form),
-            headers:{
-                'Content-Type': 'application/json'
-            }
-        })
-        const data = await response.json();
-        data.code!=='ok' ?  setMsg(data.code) : setMsg("Register Successful")
+        if(!form.name.includes(' ')) setMsg("Name should contain a space")
+        else{
+            const response = await fetch(process.env.REACT_APP_SERVER_ADD+"register",{
+                method: "POST",
+                body: JSON.stringify(form),
+                headers:{
+                    'Content-Type': 'application/json'
+                }
+            })
+            const data = await response.json();
+            data.code!=='ok' ?  setMsg(data.code) : setMsg("Register Successful")
+        }
     }
 
     return (

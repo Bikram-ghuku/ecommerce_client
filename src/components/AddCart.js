@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import Navbar from './Navbar'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
@@ -6,6 +6,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 function AddCart() {
   const {itemId} = useParams();
+  useEffect(() => {
   fetch(process.env.REACT_APP_SERVER_ADD+"addCartItems", {
     method: "POST",
     body: JSON.stringify({"uid": localStorage.getItem('accId'), "pid": itemId}),
@@ -15,6 +16,7 @@ function AddCart() {
   })
   .then(resp => resp.json())
   .then(data => console.log(data))
+}, [])
   return(
     <>
       <Navbar/>

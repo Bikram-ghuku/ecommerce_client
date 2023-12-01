@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import Navbar from '../components/Navbar'
 import Cookies from 'universal-cookie/cjs/Cookies';
 import { AccountContext } from '../context/AccountProvider';
@@ -7,19 +7,30 @@ import { Link } from 'react-router-dom';
 function Home() {
   const {account} = useContext(AccountContext);
   const [respitem, setResitem] = useState([]);
+  const [seller, setSeller] = useState({});
   var res;
   var cookie = new Cookies();
   var accCookie = cookie.get('uname');
+  var loggedin = false;
   if(account.Uname || accCookie){
     res = account.Uname ? "Welcome "+account.Uname : "Welcome "+ accCookie;
-    fetch(process.env.REACT_APP_SERVER_ADD+'items', {method: "GET"})
+    loggedin = true;
+  }
+  else{
+    res = "";
+    loggedin = false;
+  }
+  useEffect(() => {
+  fetch(process.env.REACT_APP_SERVER_ADD+'items', {method: "GET"})
     .then(response => response.json())
     .then(data => setResitem(data))
     .catch(err => console.log(err))
-  }
-  else{
-    res = "Please Login to continue";
-  }
+
+  fetch(process.env.REACT_APP_SERVER_ADD+'seller', {method: "GET"})
+    .then(response => response.json())
+    .then(data => setSeller(data))
+    .catch(err => console.log(err))
+  }, []);
   return (
     <>
       <Navbar/>
@@ -40,9 +51,9 @@ function Home() {
                   ))}
                 </ul>
                 <p className='card-text'><h5>{'₹'+items.cost}</h5></p>
-                <Link to={"addCart/"+items._id} className='btn btn-primary'>Add to ShoppingCart</Link>
+                {loggedin ? <Link to={"addCart/"+items._id} className='btn btn-primary'>Add to ShoppingCart</Link> : "Login To Buy"}
                 <br/>
-                <p className='card-text'>Seller: {items.seller}</p>
+                <p className='card-text'>Seller: {seller[items.seller]}</p>
               </div>
             </div>
             <br/>

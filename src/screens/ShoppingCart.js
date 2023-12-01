@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import Navbar from '../components/Navbar'
 import Cookies from 'universal-cookie/cjs/Cookies';
 import { AccountContext } from '../context/AccountProvider';
@@ -17,6 +17,13 @@ function ShoppingCart() {
     var accCookie = cookie.get('uname');
     if(account.Uname || accCookie){
       res = account.Uname ? "Welcome "+account.Uname : "Welcome "+ accCookie; 
+      
+    }
+    else{
+        res = "Please Login to continue";
+    }
+
+    useEffect(() => {
       fetch(process.env.REACT_APP_SERVER_ADD+"cartItems", {
           method: "POST",
           body: JSON.stringify({id: localStorage.getItem("accId")}),
@@ -27,10 +34,7 @@ function ShoppingCart() {
         .then(response => response.json())
         .then(data => setItems(data ))
         .catch(err => console.log(err))
-    }
-    else{
-        res = "Please Login to continue";
-    }
+      }, []);
     
     totItems = items.length
     for(var i = 0; i < totItems; i++){
