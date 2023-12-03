@@ -69,7 +69,7 @@ function Navbar() {
           </Link>
         </li>
         {accType==='Seller' ? <><li className="nav-item">
-          <Link className='nav-link' to="/sellerDash">
+          <Link className='nav-link' to="/sellerDash/Dashboard">
             <Tooltip title="Seller Dashboard"><DashboardIcon/></Tooltip>
           </Link>
         </li>

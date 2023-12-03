@@ -23,7 +23,7 @@ function App() {
               <Route exact path='/addCart/:itemId' element={<AddCart/>} />
               <Route exact path='/registerSeller' element={<SellerAcc/>}/>
               <Route exact path='/logout' element={<LogOut/>}/>
-              <Route exacct path='/sellerDash' element={<Sellerdash/>}/>
+              <Route path='/sellerDash/:page' element={<Sellerdash/>}/>
             </Routes>
             </AccountProvider>
       </div>
