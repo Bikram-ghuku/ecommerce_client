@@ -4,8 +4,10 @@ import { AccountContext } from '../context/AccountProvider';
 import Cookies from 'universal-cookie/cjs/Cookies';
 import { Avatar, IconButton, Badge, Menu, MenuItem, ListItemIcon, Tooltip, Paper } from '@mui/material';
 import Logout from '@mui/icons-material/Logout'
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Settings } from '@mui/icons-material';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 
 
 function stringAvatar(name) {
@@ -32,6 +34,7 @@ function Navbar() {
   var cookie = new Cookies();
   var accCookie = cookie.get('uname');
   var accVar = account.Uname
+  var accType = account.type || cookie.get('type');
   if(accVar || accCookie){
     fetch(process.env.REACT_APP_SERVER_ADD+"cartItems", {
         method: "POST",
@@ -53,18 +56,30 @@ function Navbar() {
     </button>
     <div className="collapse navbar-collapse" id="navbarNav">
       <ul className="navbar-nav" style={{paddingLeft: "75vw"}}>
-        <li className="nav-item active">
+        <li className="nav-item">
           <Link className="nav-link" to="/">Home</Link>
         </li>
         <li className="nav-item">
           <Link className='nav-link' to="/shoppingCart">
             <IconButton aria-label="cart">
               <Badge badgeContent={numItems} color="primary">
-                <Tooltip title="Open Cart"><ShoppingCartIcon/></Tooltip>
+                <Tooltip title="Open Cart"><ShoppingCartOutlinedIcon/></Tooltip>
               </Badge>
             </IconButton>
           </Link>
-          
+        </li>
+        {accType==='Seller' ? <><li className="nav-item">
+          <Link className='nav-link' to="/sellerDash">
+            <Tooltip title="Seller Dashboard"><DashboardIcon/></Tooltip>
+          </Link>
+        </li>
+        </> : null}
+        <li>
+          <IconButton aria-label="Notifications">
+            <Badge badgeContent={0} color="primary">
+              <Tooltip title="Notifications"><NotificationsNoneOutlinedIcon/></Tooltip>
+            </Badge>
+          </IconButton>
         </li>
         <li className="nav-item">
         {accVar || accCookie?  <Tooltip title="Account Settings">

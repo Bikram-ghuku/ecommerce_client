@@ -8,6 +8,7 @@ import ShoppingCart from './screens/ShoppingCart';
 import AddCart from './components/AddCart';
 import SellerAcc from './screens/SellerAcc';
 import LogOut from './screens/LogOut';
+import Sellerdash from './screens/Sellerdash';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route exact path='/addCart/:itemId' element={<AddCart/>} />
               <Route exact path='/registerSeller' element={<SellerAcc/>}/>
               <Route exact path='/logout' element={<LogOut/>}/>
+              <Route exacct path='/sellerDash' element={<Sellerdash/>}/>
             </Routes>
             </AccountProvider>
       </div>
