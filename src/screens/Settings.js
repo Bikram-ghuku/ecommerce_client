@@ -34,7 +34,15 @@ function Settings() {
             headers:{
                 'Content-Type': 'application/json'
             }
-        }).then(res => res.json()).then(data => console.log(data));
+        }).then(res => res.json()).then((data) => {
+            if(data.code === 'ok'){
+                alert('Address added successfully');
+                window.location.reload();
+            }
+            else{
+                alert('Error adding address');
+            }
+        });
     }
 
     return (
@@ -64,23 +72,17 @@ function Settings() {
                             <Table>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell padding='checkbox' align='center'>
-                                            <CheckBox/>
-                                        </TableCell>
-                                        <TableCell align='center'>Address</TableCell>
-                                        <TableCell align='center'>Pincode</TableCell>
-                                        <TableCell align='center'>City</TableCell>
-                                        <TableCell align='center'>State</TableCell>
-                                        <TableCell align='center'>Country</TableCell>
-                                        <TableCell align='center'>Phone</TableCell>
+                                        <TableCell align='center'><b>Address</b></TableCell>
+                                        <TableCell align='center'><b>Pincode</b></TableCell>
+                                        <TableCell align='center'><b>City</b></TableCell>
+                                        <TableCell align='center'><b>State</b></TableCell>
+                                        <TableCell align='center'><b>Country</b></TableCell>
+                                        <TableCell align='center'><b>Phone</b></TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
                                     {addresses.map((row) => (
                                         <TableRow key={row._id}>
-                                            <TableCell padding='checkbox' align='center'>
-                                                <CheckBox/>
-                                            </TableCell>
                                             <TableCell align='center'>{row.address}</TableCell>
                                             <TableCell align='center'>{row.city}</TableCell>
                                             <TableCell align='center'>{row.pin}</TableCell>

@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie/cjs/Cookies';
 import { AccountContext } from '../context/AccountProvider';
 import './css/shoppingCart.css'
 import { Link } from 'react-router-dom';
-import { FormControl, InputLabel, Select, TextField } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 
 function deletePdt(id, index){
   fetch(process.env.REACT_APP_SERVER_ADD+"removeCart", {
@@ -22,6 +22,7 @@ function deletePdt(id, index){
 
 function ShoppingCart() {
     const [promoCode, setPromoCode] = useState();
+    const [addresses, setAddresses] = React.useState([]);
     const [discount, setDiscount] = useState(0);
     const {account} = useContext(AccountContext);
     const [items, setItems]  = useState([]);
@@ -48,6 +49,15 @@ function ShoppingCart() {
         .then(response => response.json())
         .then(data => setItems(data ))
         .catch(err => console.log(err))
+
+        const res = fetch(process.env.REACT_APP_SERVER_ADD+'getAddress', {
+          method: "POST",
+          body: JSON.stringify({uid: localStorage.getItem('accId')}),
+          headers:{
+              'Content-Type': 'application/json'
+          }
+      }).then(res => res.json()).then(data => setAddresses(data));
+
       }, []);
     
     totItems = items.length
@@ -130,7 +140,11 @@ function ShoppingCart() {
                         <div className='shipInp'>
                           <FormControl style={{width: "20vw"}}>
                             <InputLabel id="shipAddLabel">Shipping Address</InputLabel>
-                            <Select label='Select address' labelId='shipAddLabel'></Select>
+                            <Select label='Select address' labelId='shipAddLabel' >
+                              {addresses.map((row) => (
+                                <MenuItem key={row._id} value={row._id}>{row.address+', '+row.pin}</MenuItem>
+                              ))}
+                            </Select>
                           </FormControl>
                         </div>
                         <div className='pcTitle'><h5>PROMO CODE</h5></div>
