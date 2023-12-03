@@ -6,6 +6,20 @@ import './css/shoppingCart.css'
 import { Link } from 'react-router-dom';
 import { FormControl, InputLabel, Select, TextField } from '@mui/material';
 
+function deletePdt(id, index){
+  fetch(process.env.REACT_APP_SERVER_ADD+"removeCart", {
+    method: "POST",
+    body: JSON.stringify({pid: id, uid: localStorage.getItem("accId")}),
+    headers:{
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
+  window.location.reload();
+}
+
 function ShoppingCart() {
     const [promoCode, setPromoCode] = useState();
     const [discount, setDiscount] = useState(0);
@@ -76,6 +90,7 @@ function ShoppingCart() {
                                 <th scope='col'>Item no.</th>
                                 <th scope='col'>Item Info</th>
                                 <th scope='col'>Price</th>
+                                <th scope='col'>Delete</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -84,6 +99,7 @@ function ShoppingCart() {
                                 <td>{index + 1}</td>
                                 <td>{itemD.pdtName}</td>
                                 <td>{"₹"+itemD.cost}</td>
+                                <td><button className='btn btn-danger' onClick={() => deletePdt(itemD._id, index)}>Delete</button></td>
                               </tr>
                             ))}
                             </tbody>
