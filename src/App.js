@@ -9,6 +9,7 @@ import AddCart from './components/AddCart';
 import SellerAcc from './screens/SellerAcc';
 import LogOut from './screens/LogOut';
 import Sellerdash from './screens/Sellerdash';
+import Settings from './screens/Settings';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <Route exact path='/registerSeller' element={<SellerAcc/>}/>
               <Route exact path='/logout' element={<LogOut/>}/>
               <Route path='/sellerDash/:page' element={<Sellerdash/>}/>
+              <Route exact path='/settings' element={<Settings/>}/>
             </Routes>
             </AccountProvider>
       </div>
