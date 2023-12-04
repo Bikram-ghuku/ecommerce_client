@@ -13,18 +13,13 @@ jobs:
     - name: Use Node.js 16.x
       uses: actions/setup-node@v2
       with:
-        node-version: 16.x
+        node-version: 18.x
         cache: 'npm'
         cache-dependency-path: package-lock.json
     - name: Install dependencies
       run: npm install 
-    // - name: Run tests
-    // - run: npm test
     - name: Build file
       run: npm run build
-      
-
-    // deploy the application to netlify
     - name: Deploy production to Netlify
       uses: South-Paw/action-netlify-deploy@v1.2.0
       with:
