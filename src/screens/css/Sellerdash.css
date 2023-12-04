@@ -1,0 +1,57 @@
+.sd-main{
+    height: 87vh;
+    background-color: #ffffff;
+    width: 83vw;
+    float: right;
+    position: fixed;
+    left: 15vw;
+    top: 10vh;
+    box-shadow: 10px 5px 18px #888888;
+}
+
+.sd-p-header-title{
+    font-size: 7vh;
+    font-weight: 600;
+    margin-left: 2vw;
+    margin-top: 2vh;
+    grid-column: 3/span 2;
+    grid-row: 1/span 2;
+}
+
+.hRule{
+    outline: solid #f0f0f0;
+    width: 90%;
+}
+
+.sep{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.sd-p-header{
+    height: 10vh;
+    width: 80vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;   
+}
+
+.sd-p-header-btn{
+    grid-column: 6/span 1;
+    grid-row: 2/span 1;
+}
+
+.sd-p-table-wrap{
+    padding-top: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.sd-p-table{
+    height: 65vh;
+    overflow-y: scroll;
+    width: 80%;
+}
