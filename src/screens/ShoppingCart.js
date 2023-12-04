@@ -4,6 +4,7 @@ import Cookies from 'universal-cookie/cjs/Cookies';
 import { AccountContext } from '../context/AccountProvider';
 import './css/shoppingCart.css'
 import { Link } from 'react-router-dom';
+import AddIcon from '@mui/icons-material/Add';
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 
 function deletePdt(id, index){
@@ -144,6 +145,14 @@ function ShoppingCart() {
                               {addresses.map((row) => (
                                 <MenuItem key={row._id} value={row._id}>{row.address+', '+row.pin}</MenuItem>
                               ))}
+                              {addresses.length === 0 ? <Link to='/settings'>
+                                <MenuItem value={0}>
+                                  <div  style={{textDecoration:"none", color:"inherit"}}> 
+                                    <AddIcon/>
+                                    Add Address
+                                  </div>
+                                </MenuItem>
+                                </Link> : <></>}
                             </Select>
                           </FormControl>
                         </div>
