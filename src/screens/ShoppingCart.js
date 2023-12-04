@@ -27,6 +27,7 @@ function ShoppingCart() {
     const [discount, setDiscount] = useState(0);
     const {account} = useContext(AccountContext);
     const [items, setItems]  = useState([]);
+    const [currAdd, setCurrAdd] = useState(0);
     var res;
     var totItems, totSum = 0;
     var cookie = new Cookies();
@@ -77,6 +78,30 @@ function ShoppingCart() {
       else{
         setDiscount(0);
       }
+    }
+
+    const handleSADD = (e) =>{
+      e.preventDefault();
+      console.log(e.target.value);
+      setCurrAdd(e.target.value);
+    }
+
+
+    const orderItems = () =>{
+      if(currAdd === 0){
+        alert("Please select an address");
+        return;
+      }
+      fetch(process.env.REACT_APP_SERVER_ADD+"addOrder", {
+        method: "POST",
+        body: JSON.stringify({uid: localStorage.getItem("accId"), address:currAdd}),
+        headers:{
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(err => console.log(err))
     }
 
     return (
@@ -141,7 +166,8 @@ function ShoppingCart() {
                         <div className='shipInp'>
                           <FormControl style={{width: "20vw"}}>
                             <InputLabel id="shipAddLabel">Shipping Address</InputLabel>
-                            <Select label='Select address' labelId='shipAddLabel' >
+                            <Select label='Select address' labelId='shipAddLabel' onChange={handleSADD} defaultValue={0}>
+                              <MenuItem key={0} value={0}>Select an address</MenuItem>
                               {addresses.map((row) => (
                                 <MenuItem key={row._id} value={row._id}>{row.address+', '+row.pin}</MenuItem>
                               ))}
@@ -152,7 +178,7 @@ function ShoppingCart() {
                                     Add Address
                                   </div>
                                 </MenuItem>
-                                </Link> : <></>}
+                                </Link> : <div></div>}
                             </Select>
                           </FormControl>
                         </div>
@@ -171,7 +197,7 @@ function ShoppingCart() {
                           <div className='finalAmtL'><h5>TOTAL COST</h5></div>
                           <div className='finalAmtR'><h5>₹{totSum > discount ? totSum - discount : totSum}</h5></div>
                           <div className='checkOutBtn'>
-                            <button className='btn btn-secondary' style={{width: "100%", backgroundColor:"#1e2f97"}}>
+                            <button className='btn btn-secondary' style={{width: "100%", backgroundColor:"#1e2f97"}} onClick={() => orderItems()}>
                               <h5>CHECKOUT</h5>
                             </button>
                           </div>
