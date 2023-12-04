@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import {Link} from 'react-router-dom';
 import { AccountContext } from '../context/AccountProvider';
 import Cookies from 'universal-cookie/cjs/Cookies';
-import { Avatar, IconButton, Badge, Menu, MenuItem, ListItemIcon, Tooltip, Paper } from '@mui/material';
+import { Avatar, IconButton, Badge, Menu, MenuItem, ListItemIcon, Tooltip, Paper, DialogTitle } from '@mui/material';
 import Logout from '@mui/icons-material/Logout'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Settings } from '@mui/icons-material';
@@ -93,6 +93,7 @@ function Navbar() {
       </ul>
       <Paper style={{backgroundColor: "#0dcaf0"}}>
         <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClick={handleClose} onClose={handleClose} >
+          <DialogTitle id="simple-dialog-title">{accVar || accCookie}</DialogTitle>
           <MenuItem>
             <Link to="/settings" style={{color:"inherit", textDecoration:"none"}}>
               <ListItemIcon>
