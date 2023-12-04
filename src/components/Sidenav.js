@@ -3,6 +3,7 @@ import { Box, DialogTitle, Drawer, List, ListItem, ListItemText, ListItemIcon, L
 import Inventory2Icon from '@mui/icons-material/Inventory2';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import RateReviewIcon from '@mui/icons-material/RateReview';
 import { Home } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
@@ -10,6 +11,12 @@ import { Link } from 'react-router-dom';
 
 function Sidenav() {
     const open = true;
+    const options = [
+        [<Home/>, 'Dashboard'], 
+        [<SaveAltIcon/> , 'Orders'], 
+        [<Inventory2Icon/>, 'Products'], 
+        [<MonetizationOnIcon/>, 'Revenue'], 
+        [<RateReviewIcon/>, 'Reviews']];
     return (
         <div className='drawer' style={{display:'flex', backgroundColor: 'red', width:'13vw'}}>
             <Drawer
@@ -29,9 +36,9 @@ function Sidenav() {
                 open={open}
             >
                 <Box sx={{ width: 250 }} role="presentation">
-                    <DialogTitle>Menu</DialogTitle>
+                    <DialogTitle>Seller Menu</DialogTitle>
                     <List>
-                        {[[<Home/>, 'Dashboard'], [<SaveAltIcon/> , 'Orders'], [<Inventory2Icon/>, 'Products'], [<MonetizationOnIcon/>, 'Revenue']].map((text, index) => (
+                        {options.map((text, index) => (
                             <ListItem key={index}>
                                 <Link to={'/sellerDash/'+text[1]} style={{textDecoration: 'none', color: 'black'}}>
                                     <ListItemButton>
