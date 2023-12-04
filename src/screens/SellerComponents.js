@@ -9,10 +9,62 @@ function Dashboard() {
 }
 
 function Orders() {
+    const [orders, setOrders] = React.useState([]);
+    useEffect(() => {
+        fetch(process.env.REACT_APP_SERVER_ADD+'getOrders', {
+            method: "POST",
+            body: JSON.stringify({uid: localStorage.getItem('accId')}),
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json()).then(data => setOrders(data));
+        
+    }, [])
     return (
-        <div>Orders</div>
+        <div className='sd-p-main'>
+            <div className="sd-p">
+                <div className="sd-p-header">
+                    <div className="sd-p-header-title">Orders</div>
+                </div>
+                <br/><br/>
+                <div className="sep"><div className="hRule"></div></div>
+                <div className="sd-p-table-wrap">
+                    <div className="sd-p-table">
+                        <Table stickyHeader aria-label="sticky table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell><b>OrderId</b></TableCell>
+                                    <TableCell><b>Product Name</b></TableCell>
+                                    <TableCell><b>Quantity</b></TableCell>
+                                    <TableCell><b>Status</b></TableCell>
+                                    <TableCell><b>Address</b></TableCell>
+                                    <TableCell><b>User</b></TableCell>
+                                    <TableCell><b>Actions</b></TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {orders.map((order) => (
+                                    <TableRow key={order._id}>
+                                        <TableCell>{order._id}</TableCell>
+                                        <TableCell>{order.pdtName}</TableCell>
+                                        <TableCell>{order.qty}</TableCell>
+                                        <TableCell>{order.status}</TableCell>
+                                        <TableCell>{order.address}</TableCell>
+                                        <TableCell>{order.user}</TableCell>
+                                        <TableCell>
+                                            <div className='btn btn-primary'>Update status</div>
+                                            <div className='btn btn-danger'>Delete order</div>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
-  }
+}
 
 function Products() {
     const [products, setProducts] = React.useState([]);
@@ -37,14 +89,15 @@ function Products() {
                 <div className="sep"><div className="hRule"></div></div>
                 <div className="sd-p-table-wrap">
                     <div className="sd-p-table">
-                        <Table>
+                        <Table stickyHeader aria-label="sticky table">
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>Image</TableCell>
-                                    <TableCell>Product Name</TableCell>
-                                    <TableCell>Product Description</TableCell>
-                                    <TableCell>Price</TableCell>
-                                    <TableCell>Actions</TableCell>
+                                    <TableCell><b>Image</b></TableCell>
+                                    <TableCell><b>Product Name</b></TableCell>
+                                    <TableCell><b>Product Description</b></TableCell>
+                                    <TableCell><b>Price</b></TableCell>
+                                    <TableCell><b>Actions</b></TableCell>
+                                    <TableCell><b>Display</b></TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -55,6 +108,7 @@ function Products() {
                                         <TableCell>{product.desc}</TableCell>
                                         <TableCell>{'₹' + product.cost}</TableCell>
                                         <TableCell><div className="btn btn-danger">Delete</div></TableCell>
+                                        <TableCell>{product.dispType}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
