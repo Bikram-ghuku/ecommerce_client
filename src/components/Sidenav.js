@@ -9,17 +9,9 @@ import { Link } from 'react-router-dom';
 
 
 function Sidenav() {
-    const [open, setOpen] = React.useState(true);
-
-    const toggleDrawer = (inOpen) => (event) => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return;
-        }
-
-        setOpen(inOpen);
-    };
-  return (
-    <div className='drawer' style={{display:'flex', backgroundColor: 'red', width:'13vw'}}>
+    const open = true;
+    return (
+        <div className='drawer' style={{display:'flex', backgroundColor: 'red', width:'13vw'}}>
             <Drawer
                 sx={{
                     '& .MuiDrawer-root': {
@@ -53,7 +45,7 @@ function Sidenav() {
                 </Box>
             </Drawer>
         </div>
-  )
+    )
 }
 
 export default Sidenav

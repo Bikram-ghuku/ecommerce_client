@@ -3,7 +3,6 @@ import Navbar from '../components/Navbar'
 import { Button, TableBody, Table, TableCell, TableHead, TableRow, TextField } from '@mui/material'
 import './css/settings.css'
 import HomeIcon from '@mui/icons-material/Home';
-import { CheckBox } from '@mui/icons-material';
 import AddIcon from '@mui/icons-material/Add';
 
 function Settings() {
@@ -11,13 +10,13 @@ function Settings() {
     const [addresses, setAddresses] = React.useState([]);
 
     useEffect(() => {
-    const res = fetch(process.env.REACT_APP_SERVER_ADD+'getAddress', {
-        method: "POST",
-        body: JSON.stringify({uid: localStorage.getItem('accId')}),
-        headers:{
-            'Content-Type': 'application/json'
-        }
-    }).then(res => res.json()).then(data => setAddresses(data));
+        fetch(process.env.REACT_APP_SERVER_ADD+'getAddress', {
+            method: "POST",
+            body: JSON.stringify({uid: localStorage.getItem('accId')}),
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json()).then(data => setAddresses(data));
     }, [])
 
 
@@ -28,7 +27,7 @@ function Settings() {
     }
 
     const addAddress = () => {
-        const response = fetch(process.env.REACT_APP_SERVER_ADD+'addAddress',{
+       fetch(process.env.REACT_APP_SERVER_ADD+'addAddress',{
             method: "POST",
             body: JSON.stringify(formData),
             headers:{

@@ -1,9 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import Cookies from 'universal-cookie/cjs/Cookies';
 import { Link} from 'react-router-dom';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Navbar from '../components/Navbar';
-import { AccountContext } from '../context/AccountProvider';
 
 function LogOut() {
     var cookie = new Cookies();

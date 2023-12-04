@@ -50,7 +50,7 @@ function ShoppingCart() {
         .then(data => setItems(data ))
         .catch(err => console.log(err))
 
-        const res = fetch(process.env.REACT_APP_SERVER_ADD+'getAddress', {
+        fetch(process.env.REACT_APP_SERVER_ADD+'getAddress', {
           method: "POST",
           body: JSON.stringify({uid: localStorage.getItem('accId')}),
           headers:{

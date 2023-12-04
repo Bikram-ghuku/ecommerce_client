@@ -7,16 +7,16 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 function AddCart() {
   const {itemId} = useParams();
   useEffect(() => {
-  fetch(process.env.REACT_APP_SERVER_ADD+"addCartItems", {
-    method: "POST",
-    body: JSON.stringify({"uid": localStorage.getItem('accId'), "pid": itemId}),
-    headers:{
-      'Content-Type': 'application/json'
-  }
-  })
-  .then(resp => resp.json())
-  .then(data => console.log(data))
-}, [])
+    fetch(process.env.REACT_APP_SERVER_ADD+"addCartItems", {
+      method: "POST",
+      body: JSON.stringify({"uid": localStorage.getItem('accId'), "pid": itemId}),
+      headers:{
+        'Content-Type': 'application/json'
+    }
+    })
+    .then(resp => resp.json())
+    .then(data => console.log(data))
+  }, [])
   return(
     <>
       <Navbar/>

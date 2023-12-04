@@ -63,7 +63,7 @@ body{
     align-items: center;
     width: 25vw;
     text-align: right;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .itemListCont{
