@@ -10,6 +10,8 @@ function LogOut() {
     
     if(cookie.get('type')) cookie.remove('type');
 
+    localStorage.removeItem('accId');
+
     return(
         <>
             <Navbar/>
