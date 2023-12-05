@@ -1,4 +1,4 @@
-import { TableRow, Table, TableCell, TableHead, TableBody, Box, TextField, Select, MenuItem, InputLabel, FormControl } from '@mui/material'
+import { TableRow, Table, TableCell, TableHead, TableBody, Box, TextField, Select, MenuItem, InputLabel, FormControl, CircularProgress } from '@mui/material'
 import React, { useEffect } from 'react'
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom';
@@ -145,6 +145,7 @@ function Products() {
                                 ))}
                             </TableBody>
                         </Table>
+                        {products.length === 0 ? <CircularProgress sx={{height: "90vh"}}/> : ""}
                     </div>
                 </div>
             </div>
