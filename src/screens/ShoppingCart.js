@@ -16,9 +16,8 @@ function deletePdt(id, index){
     }
   })
   .then(response => response.json())
-  .then(data => console.log(data))
+  .then(data => window.location.reload())
   .catch(err => console.log(err))
-  window.location.reload();
 }
 
 function ShoppingCart() {
