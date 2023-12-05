@@ -103,7 +103,7 @@ function Navbar() {
             				</Link>
           				</MenuItem>
 						  <MenuItem>
-            				<Link to="/logout" style={{color:"inherit", textDecoration:"none"}}>
+            				<Link to="/myOrders" style={{color:"inherit", textDecoration:"none"}}>
               					<ListItemIcon>
                 					<ShoppingBasketIcon/>
               					</ListItemIcon>
