@@ -3,21 +3,21 @@ import Navbar from '../components/Navbar'
 import Cookies from 'universal-cookie/cjs/Cookies';
 import { AccountContext } from '../context/AccountProvider';
 import './css/shoppingCart.css'
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
-import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { CircularProgress, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 
 function deletePdt(id, index){
-  fetch(process.env.REACT_APP_SERVER_ADD+"removeCart", {
-    method: "POST",
-    body: JSON.stringify({pid: id, uid: localStorage.getItem("accId")}),
-    headers:{
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(response => response.json())
-  .then(data => window.location.reload())
-  .catch(err => console.log(err))
+  	fetch(process.env.REACT_APP_SERVER_ADD+"removeCart", {
+    	method: "POST",
+    	body: JSON.stringify({pid: id, uid: localStorage.getItem("accId")}),
+    	headers:{
+      		'Content-Type': 'application/json'
+    	}
+  	})
+  	.then(response => response.json())
+  	.then(data => window.location.reload())
+  	.catch(err => console.log(err))
 }
 
 function ShoppingCart() {
@@ -81,7 +81,6 @@ function ShoppingCart() {
 
     const handleSADD = (e) =>{
       	e.preventDefault();
-      	console.log(e.target.value);
       	setCurrAdd(e.target.value);
     }
 
@@ -128,6 +127,7 @@ function ShoppingCart() {
                                 			<th scope='col'>Delete</th>
                               			</tr>
                             		</thead>
+									{items.length === 0 ? <CircularProgress/> : <></>}
                             		<tbody>
                             			{items.map((itemD, index)=>(
                               				<tr key={index}>
