@@ -75,6 +75,7 @@ function Orders() {
                                 ))}
                             </TableBody>
                         </Table>
+                        {orders.length === 0 ? <CircularProgress sx={{height: "90vh"}}/> : ""}
                     </div>
                 </div>
             </div>
