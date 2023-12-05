@@ -1,4 +1,4 @@
-import { TableRow, Table, TableCell, TableHead, TableBody, Box, TextField, Select, MenuItem, InputLabel, FormControl, CircularProgress } from '@mui/material'
+import { TableRow, Table, TableCell, TableHead, TableBody, Box, TextField, Select, MenuItem, InputLabel, FormControl, CircularProgress, Button } from '@mui/material'
 import React, { useEffect } from 'react'
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom';
@@ -167,6 +167,25 @@ function Reviews() {
 }
 
 function AddProducts() {
+    const [products, setProducts] = React.useState({pdtName: '', desc: '', cost: '', img: '', dispType: ''});
+    const [status, setStatus] = React.useState('');
+    const handleChange = (e) => {
+        setProducts({...products, [e.target.name]: e.target.value});
+    }
+
+    const handleSubmit = () => {
+        setStatus('Adding Product...');
+        fetch(process.env.REACT_APP_SERVER_ADD+'addProduct', {
+            method: "POST",
+            body: JSON.stringify(products),
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json()).then((data) => {
+            setStatus(data.status);
+        });
+    }
+
     return (
         <div className='sd-p-main'>
             <div className="sd-p">
@@ -177,18 +196,36 @@ function AddProducts() {
             <br/><br/>
             <div className="sep"><div className="hRule"></div></div>
             <div className="sd-ap-grid">
-                Product Name: <TextField id="outlined-basic" label="Product Name" variant="outlined" />
-                Product Description: <TextField id="outlined-basic" label="Product Description" variant="outlined" />
-                Product Price: <TextField id="outlined-basic" label="Price" variant="outlined" />
-                Product Display Type: <FormControl>
-                    <InputLabel id="selectLabel">Display Type</InputLabel>
-                    <Select label='Display Typ'  labelId='selectLabel' defaultValue={2}>
-                        <MenuItem value={0}>Normal</MenuItem>
-                        <MenuItem value={1}>Featured</MenuItem>
-                        <MenuItem value={2}>Private</MenuItem>
-                    </Select>
-                </FormControl>
+                <div className="sd-inp-label">Product Name: </div>
+                <div className='sd-inp-field'>
+                    <TextField id="outlined-basic" label="Product Name" variant="outlined" sx={{width:'95%'}} name='pdtName' onChange={handleChange}/>
+                </div>
+                <div className="sd-inp-label" style={{gridRow:'2/span 2'}}>Product Description: </div>
+                <div className='sd-inp-field' style={{gridRow:'2/span 2', height:'100%'}}>
+                    <TextField id="outlined-basic" label="Product Description" variant="outlined" sx={{width:'95%'}} multiline rows={3} name='desc' onChange={handleChange}/>
+                </div>
+                <div className="sd-inp-label">Product Price: </div>
+                <div className='sd-inp-field'>
+                    <TextField id="outlined-basic" label="Price" variant="outlined" sx={{width:'95%'}} name='cost' onChange={handleChange}/>
+                </div>
+                <div className="sd-inp-label">Product Image: </div>
+                <div className='sd-inp-field'>
+                    <TextField id="outlined-basic" label="Image URL" variant="outlined" sx={{width:'95%'}} name='img' onChange={handleChange}/>
+                </div>
+                <div className="sd-inp-label">Product Display Type: </div>
+                <div className='sd-inp-field'>
+                    <FormControl sx={{width:'95%'}}>
+                        <InputLabel id="selectLabel">Display Type</InputLabel>
+                        <Select label='Display Typ'  labelId='selectLabel' defaultValue={2} name='dispType' onChange={handleChange}>
+                            <MenuItem value={0}>Normal</MenuItem>
+                            <MenuItem value={1}>Featured</MenuItem>
+                            <MenuItem value={2}>Private</MenuItem>
+                        </Select>
+                    </FormControl>
+                </div>
             </div>
+            <Button variant="contained" onClick={() => handleSubmit()}>Add Product</Button>
+            <div className="sd-ap-stat">{status}</div>
         </div>
     )
 }

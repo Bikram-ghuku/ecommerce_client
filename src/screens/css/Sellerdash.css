@@ -55,3 +55,21 @@
     overflow-y: scroll;
     width: 80%;
 }
+
+.sd-ap-grid{
+    padding-top: 10vh;
+    padding-left: 20vw;
+    height: 50vh;
+    width: 70vw;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+}
+
+.sd-inp-label{
+    grid-column: 1/span 1;
+}
+
+.sd-inp-field{
+    grid-column: 2/span 2;
+}
