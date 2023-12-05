@@ -1,4 +1,4 @@
-import { TableRow, Table, TableCell, TableHead, TableBody } from '@mui/material'
+import { TableRow, Table, TableCell, TableHead, TableBody, Box } from '@mui/material'
 import React, { useEffect } from 'react'
 import AddIcon from '@mui/icons-material/Add';
 
@@ -17,7 +17,22 @@ function Orders() {
             headers:{
                 'Content-Type': 'application/json'
             }
-        }).then(res => res.json()).then(data => setOrders(data));
+        }).then(res => res.json()).then((data) => {
+            setOrders(data)
+            var orderCP = data;
+            for(var i = 0; i < orderCP.length; i++) {
+                if(orderCP[i].status === 'Pending') {
+                    orderCP[i].status = <Box sx={{color: 'warning.main'}}>Pending</Box>
+                } else if(orderCP[i].status === 'delivered') {
+                    orderCP[i].status = <Box sx={{color: 'success.main'}}>Delivered</Box>
+                } else if(orderCP[i].status === 'cancelled') {
+                    orderCP[i].status = <Box sx={{color: 'error.main'}}>cancelled</Box>
+                } else if(orderCP[i].status === 'shipped') {
+                    orderCP[i].status = <Box sx={{color: 'info.main'}}>Shipped</Box>
+                }
+            }
+            setOrders(orderCP);
+        });
         
     }, [])
     return (
