@@ -167,10 +167,11 @@ function Reviews() {
 }
 
 function AddProducts() {
-    const [products, setProducts] = React.useState({pdtName: '', desc: '', cost: '', img: '', dispType: ''});
+    const [products, setProducts] = React.useState({pdtName: '', desc: '', cost: '', img: '', dispType: '', uid: localStorage.getItem('accId')});
     const [status, setStatus] = React.useState('');
     const handleChange = (e) => {
         setProducts({...products, [e.target.name]: e.target.value});
+        console.log(products);
     }
 
     const handleSubmit = () => {
@@ -216,10 +217,10 @@ function AddProducts() {
                 <div className='sd-inp-field'>
                     <FormControl sx={{width:'95%'}}>
                         <InputLabel id="selectLabel">Display Type</InputLabel>
-                        <Select label='Display Typ'  labelId='selectLabel' defaultValue={2} name='dispType' onChange={handleChange}>
-                            <MenuItem value={0}>Normal</MenuItem>
-                            <MenuItem value={1}>Featured</MenuItem>
-                            <MenuItem value={2}>Private</MenuItem>
+                        <Select label='Display Typ'  labelId='selectLabel' defaultValue={"private"} name='dispType' onChange={handleChange}>
+                            <MenuItem value={"normal"}>Normal</MenuItem>
+                            <MenuItem value={"featured"}>Featured</MenuItem>
+                            <MenuItem value={"private"}>Private</MenuItem>
                         </Select>
                     </FormControl>
                 </div>
