@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar'
 import Cookies from 'universal-cookie/cjs/Cookies';
 import { AccountContext } from '../context/AccountProvider';
 import './css/shoppingCart.css'
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import { CircularProgress, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 
