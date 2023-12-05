@@ -1,6 +1,7 @@
-import { TableRow, Table, TableCell, TableHead, TableBody, Box } from '@mui/material'
+import { TableRow, Table, TableCell, TableHead, TableBody, Box, TextField, Select, MenuItem, InputLabel, FormControl } from '@mui/material'
 import React, { useEffect } from 'react'
 import AddIcon from '@mui/icons-material/Add';
+import { Link } from 'react-router-dom';
 
 function Dashboard() {
     return (
@@ -90,7 +91,19 @@ function Products() {
             headers:{
                 'Content-Type': 'application/json'
             }
-        }).then(res => res.json()).then(data => setProducts(data));
+        }).then(res => res.json()).then((data) => {
+            setProducts(data)
+            var productCP = data;
+            for(var i = 0; i < productCP.length; i++) {
+                if(productCP[i].dispType === 'featured') {
+                    productCP[i].dispType = <Box sx={{color: 'success.main'}}>Featured</Box>
+                } else if(productCP[i].dispType === 'normal') {
+                    productCP[i].dispType = <Box sx={{color: 'primary.main'}}>Normal</Box>
+                }else{
+                    productCP[i].dispType = <Box sx={{color: 'error.main'}}>Private</Box>
+                }
+            }
+        });
         
     }, [])
     return (
@@ -98,7 +111,11 @@ function Products() {
             <div className="sd-p">
                 <div className="sd-p-header">
                     <div className="sd-p-header-title">Products</div>
-                    <div className="sd-p-header-btn btn btn-primary"><AddIcon/> Add Product</div>
+                    <div className="sd-p-header-btn btn btn-primary">
+                        <Link to='/sellerDash/addProduct'>
+                            <font style={{color:'white', textDecoration: 'none'}}><AddIcon/> Add Product</font>
+                        </Link>
+                    </div>
                 </div>
                 <br/><br/>
                 <div className="sep"><div className="hRule"></div></div>
@@ -147,5 +164,32 @@ function Reviews() {
     )
 }
 
+function AddProducts() {
+    return (
+        <div className='sd-p-main'>
+            <div className="sd-p">
+                <div className="sd-p-header">
+                    <div className="sd-p-header-title">Add Products</div>
+                </div>
+            </div>
+            <br/><br/>
+            <div className="sep"><div className="hRule"></div></div>
+            <div className="sd-ap-grid">
+                Product Name: <TextField id="outlined-basic" label="Product Name" variant="outlined" />
+                Product Description: <TextField id="outlined-basic" label="Product Description" variant="outlined" />
+                Product Price: <TextField id="outlined-basic" label="Price" variant="outlined" />
+                Product Display Type: <FormControl>
+                    <InputLabel id="selectLabel">Display Type</InputLabel>
+                    <Select label='Display Typ'  labelId='selectLabel' defaultValue={2}>
+                        <MenuItem value={0}>Normal</MenuItem>
+                        <MenuItem value={1}>Featured</MenuItem>
+                        <MenuItem value={2}>Private</MenuItem>
+                    </Select>
+                </FormControl>
+            </div>
+        </div>
+    )
+}
 
-export {Dashboard, Orders, Products, Revenue, Reviews}
+
+export {Dashboard, Orders, Products, Revenue, Reviews, AddProducts}
