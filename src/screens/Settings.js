@@ -83,8 +83,8 @@ function Settings() {
                                     {addresses.map((row) => (
                                         <TableRow key={row._id}>
                                             <TableCell align='center'>{row.address}</TableCell>
-                                            <TableCell align='center'>{row.city}</TableCell>
                                             <TableCell align='center'>{row.pin}</TableCell>
+                                            <TableCell align='center'>{row.city}</TableCell>
                                             <TableCell align='center'>{row.state}</TableCell>
                                             <TableCell align='center'>{row.country}</TableCell>
                                             <TableCell align='center'>{row.phone}</TableCell>
