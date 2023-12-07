@@ -61,7 +61,8 @@ function Register() {
                         <br/>
                             <button type="submit" className="btn btn-primary">Register</button>
                         <br/>
-                        <label className='info-box'>Already have an account? <Link to="/login">Login</Link></label>
+                        <label className='info-box'>Already have an account? <Link to="/login">Login</Link></label><br/>
+                        <label className='info-box'>Want to sell products? <Link to="/registerSeller">Register</Link></label>
                     </form>
                 </div>
             </div>
