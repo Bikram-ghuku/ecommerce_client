@@ -9,6 +9,20 @@ function Dashboard() {
     )
 }
 
+function delPdt(id) {
+    fetch(process.env.REACT_APP_SERVER_ADD+'delProduct', {
+        method: "POST",
+        body: JSON.stringify({pid: id}),
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    }).then(res => res.json()).then((data) => {
+        if(data.code === 'ok') {
+            window.location.reload();
+        }
+    });
+}
+
 function Orders() {
     const [orders, setOrders] = React.useState([]);
     const [gotOrders, setGotOrders] = React.useState(false);
@@ -70,8 +84,8 @@ function Orders() {
                                         <TableCell>{order.address}</TableCell>
                                         <TableCell>{order.user}</TableCell>
                                         <TableCell>
-                                            <div className='btn btn-primary'>Update status</div>
-                                            <div className='btn btn-danger'>Delete order</div>
+                                            <button className='btn btn-primary' >Update status</button>
+                                            <button className='btn btn-danger'>Delete order</button>
                                         </TableCell>
                                     </TableRow>
                                 ))}
@@ -144,7 +158,7 @@ function Products() {
                                         <TableCell>{product.pdtName}</TableCell>
                                         <TableCell>{product.desc}</TableCell>
                                         <TableCell>{'₹' + product.cost}</TableCell>
-                                        <TableCell><div className="btn btn-danger">Delete</div></TableCell>
+                                        <TableCell><button className="btn btn-danger" onClick={() => delPdt(product._id)}>Delete</button></TableCell>
                                         <TableCell>{product.dispType}</TableCell>
                                     </TableRow>
                                 ))}
