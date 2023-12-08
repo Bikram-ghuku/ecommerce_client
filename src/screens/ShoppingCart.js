@@ -27,6 +27,7 @@ function ShoppingCart() {
     const {account} = useContext(AccountContext);
     const [items, setItems]  = useState([]);
     const [currAdd, setCurrAdd] = useState(0);
+	const [gotItems, setGotItems] = useState(false);
     var res;
     var totItems, totSum = 0;
     var cookie = new Cookies();
@@ -48,7 +49,10 @@ function ShoppingCart() {
           }
         })
         .then(response => response.json())
-        .then(data => setItems(data ))
+        .then((data) => {
+			setItems(data)
+			setGotItems(true)
+		})
         .catch(err => console.log(err))
 
         fetch(process.env.REACT_APP_SERVER_ADD+'getAddress', {
@@ -127,7 +131,7 @@ function ShoppingCart() {
                                 			<th scope='col'>Delete</th>
                               			</tr>
                             		</thead>
-									{items.length === 0 ? <CircularProgress/> : <></>}
+									{!gotItems ? <CircularProgress/> : <></>}
                             		<tbody>
                             			{items.map((itemD, index)=>(
                               				<tr key={index}>

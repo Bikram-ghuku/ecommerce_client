@@ -11,6 +11,7 @@ function Dashboard() {
 
 function Orders() {
     const [orders, setOrders] = React.useState([]);
+    const [gotOrders, setGotOrders] = React.useState(false);
     useEffect(() => {
         fetch(process.env.REACT_APP_SERVER_ADD+'getOrders', {
             method: "POST",
@@ -20,6 +21,7 @@ function Orders() {
             }
         }).then(res => res.json()).then((data) => {
             setOrders(data)
+            setGotOrders(true);
             var orderCP = data;
             for(var i = 0; i < orderCP.length; i++) {
                 if(orderCP[i].status === 'Pending') {
@@ -75,7 +77,7 @@ function Orders() {
                                 ))}
                             </TableBody>
                         </Table>
-                        {orders.length === 0 ? <CircularProgress sx={{height: "90vh"}}/> : ""}
+                        {!gotOrders ? <CircularProgress sx={{height: "90vh"}}/> : ""}
                     </div>
                 </div>
             </div>
@@ -85,6 +87,7 @@ function Orders() {
 
 function Products() {
     const [products, setProducts] = React.useState([]);
+    const [gotPdts, setGotPdts] = React.useState(false);
     useEffect(() => {
         fetch(process.env.REACT_APP_SERVER_ADD+'getProducts', {
             method: "POST",
@@ -94,6 +97,7 @@ function Products() {
             }
         }).then(res => res.json()).then((data) => {
             setProducts(data)
+            setGotPdts(true);
             var productCP = data;
             for(var i = 0; i < productCP.length; i++) {
                 if(productCP[i].dispType === 'featured') {
@@ -146,7 +150,7 @@ function Products() {
                                 ))}
                             </TableBody>
                         </Table>
-                        {products.length === 0 ? <CircularProgress sx={{height: "90vh"}}/> : ""}
+                        {!gotPdts ? <CircularProgress sx={{height: "90vh"}}/> : ""}
                     </div>
                 </div>
             </div>
