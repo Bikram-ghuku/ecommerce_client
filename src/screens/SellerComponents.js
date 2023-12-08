@@ -23,6 +23,20 @@ function delPdt(id) {
     });
 }
 
+function deleteOrder(id) {
+    fetch(process.env.REACT_APP_SERVER_ADD+'delOrder', {
+        method: "POST",
+        body: JSON.stringify({oid: id}),
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    }).then(res => res.json()).then((data) => {
+        if(data.code === 'ok') {
+            window.location.reload();
+        }
+    });
+}
+
 function Orders() {
     const [orders, setOrders] = React.useState([]);
     const [gotOrders, setGotOrders] = React.useState(false);
@@ -39,13 +53,13 @@ function Orders() {
             var orderCP = data;
             for(var i = 0; i < orderCP.length; i++) {
                 if(orderCP[i].status === 'Pending') {
-                    orderCP[i].status = <Box sx={{color: 'warning.main'}}>Pending</Box>
+                    orderCP[i].stat = <Box sx={{color: 'warning.main'}}>Pending</Box>
                 } else if(orderCP[i].status === 'delivered') {
-                    orderCP[i].status = <Box sx={{color: 'success.main'}}>Delivered</Box>
-                } else if(orderCP[i].status === 'cancelled') {
-                    orderCP[i].status = <Box sx={{color: 'error.main'}}>cancelled</Box>
+                    orderCP[i].stat = <Box sx={{color: 'success.main'}}>Delivered</Box>
+                } else if(orderCP[i].status.toLowerCase() === 'cancelled') {
+                    orderCP[i].stat = <Box sx={{color: 'error.main'}}>cancelled</Box>
                 } else if(orderCP[i].status === 'shipped') {
-                    orderCP[i].status = <Box sx={{color: 'info.main'}}>Shipped</Box>
+                    orderCP[i].stat = <Box sx={{color: 'info.main'}}>Shipped</Box>
                 }
             }
             setOrders(orderCP);
@@ -80,12 +94,12 @@ function Orders() {
                                         <TableCell>{order._id}</TableCell>
                                         <TableCell>{order.pdtName}</TableCell>
                                         <TableCell>{order.qty}</TableCell>
-                                        <TableCell>{order.status}</TableCell>
+                                        <TableCell>{order.stat}</TableCell>
                                         <TableCell>{order.address}</TableCell>
                                         <TableCell>{order.user}</TableCell>
                                         <TableCell>
-                                            <button className='btn btn-primary' >Update status</button>
-                                            <button className='btn btn-danger'>Delete order</button>
+                                            {order.status.toLowerCase() === "cancelled" ? <></> : <button className='btn btn-primary' >Update status</button> }
+                                            <button className='btn btn-danger' onClick={() => deleteOrder(order._id)}>Delete order</button>
                                         </TableCell>
                                     </TableRow>
                                 ))}
