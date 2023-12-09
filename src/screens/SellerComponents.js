@@ -98,6 +98,7 @@ function Dashboard() {
 }
 
 function delPdt(id) {
+    if(window.confirm('Are you sure you want to delete this product?') === false) return;
     fetch(process.env.REACT_APP_SERVER_ADD+'delProduct', {
         method: "POST",
         body: JSON.stringify({pid: id}),
@@ -112,6 +113,7 @@ function delPdt(id) {
 }
 
 function deleteOrder(id) {
+    if(window.confirm('Are you sure you want to delete this order?') === false) return;
     fetch(process.env.REACT_APP_SERVER_ADD+'delOrder', {
         method: "POST",
         body: JSON.stringify({oid: id}),
