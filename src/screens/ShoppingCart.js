@@ -102,7 +102,12 @@ function ShoppingCart() {
         	}
       	})
       	.then(response => response.json())
-      	.then(data => console.log(data))
+      	.then((data) => {
+			if(data.code === "ok"){
+				alert("Order placed successfully");
+				window.location.reload();
+			}
+		})
       	.catch(err => console.log(err))
     }
 
