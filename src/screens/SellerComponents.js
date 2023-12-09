@@ -2,10 +2,57 @@ import { TableRow, Table, TableCell, TableHead, TableBody, Box, TextField, Selec
 import React, { useEffect } from 'react'
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom';
+import { LineChart } from '@mui/x-charts';
 
 function Dashboard() {
+    const [totOrders, setTotOrders] = React.useState(0);
+    const [totProducts, setTotProducts] = React.useState(0);
+    const [totRevenue, setTotRevenue] = React.useState(0);
+    useEffect(() => {
+        fetch(process.env.REACT_APP_SERVER_ADD+'getOrders', {
+            method: "POST",
+            body: JSON.stringify({sid: localStorage.getItem('accId')}),
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json()).then((data) => {
+            setTotOrders(data.length);
+        }).catch((err) => {
+            console.log(err)
+        })
+    })
     return (
-        <div>Dashboard</div>
+        <div>
+            <div className="sd-dash">
+                <div className="sd-dash-header">
+                    <h1 className="sd-dash-header-title">Dashboard</h1>
+                </div>
+                <div className="sep"><div className="hRule"></div></div>
+                <div className="sd-dash-body">
+                    <div className="sd-dash-body-card">
+                        <div className="sd-dash-body-card-title">Total Orders</div>
+                        <div className="sd-dash-body-card-value">{totOrders}</div>
+                    </div>
+                    <div className="sd-dash-body-card">
+                        <div className="sd-dash-body-card-title">Total Products</div>
+                        <div className="sd-dash-body-card-value">{totProducts}</div>
+                    </div>
+                    <div className="sd-dash-body-card">
+                        <div className="sd-dash-body-card-title">Total Revenue</div>
+                        <div className="sd-dash-body-card-value">{totRevenue}</div>
+                    </div>
+                </div>
+                <div className="sep"><div className="hRule"></div></div>
+                <div className="sd-dash-graph">
+                    <LineChart 
+                        xAxis={[{data:[1, 2, 3]}]}
+                        series={[{data:[10, 11, 13]}]}
+                        height={500}
+                        width={1000}
+                    />
+                </div>
+            </div>
+        </div>
     )
 }
 
