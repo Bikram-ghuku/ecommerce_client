@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar'
 import Cookies from 'universal-cookie/cjs/Cookies';
 import { AccountContext } from '../context/AccountProvider';
 import './css/shoppingCart.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import { CircularProgress, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 
@@ -28,6 +28,7 @@ function ShoppingCart() {
     const [items, setItems]  = useState([]);
     const [currAdd, setCurrAdd] = useState(0);
 	const [gotItems, setGotItems] = useState(false);
+	const navigate = useNavigate();
     var res;
     var totItems, totSum = 0;
     var cookie = new Cookies();
@@ -94,21 +95,10 @@ function ShoppingCart() {
         	alert("Please select an address");
         	return;
       	}
-      	fetch(process.env.REACT_APP_SERVER_ADD+"addOrder", {
-        	method: "POST",
-        	body: JSON.stringify({uid: localStorage.getItem("accId"), address:currAdd}),
-        	headers:{
-          		'Content-Type': 'application/json'
-        	}
-      	})
-      	.then(response => response.json())
-      	.then((data) => {
-			if(data.code === "ok"){
-				alert("Order placed successfully");
-				window.location.reload();
-			}
-		})
-      	.catch(err => console.log(err))
+
+		navigate('/payment');
+		
+		localStorage.setItem('address', currAdd);
     }
 
     return (

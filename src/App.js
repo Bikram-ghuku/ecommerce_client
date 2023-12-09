@@ -1,7 +1,7 @@
 import './App.css';
 import Home from './screens/Home';
 import Login from './screens/Login';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Register from './screens/Register';
 import AccountProvider from './context/AccountProvider';
 import ShoppingCart from './screens/ShoppingCart';
@@ -11,6 +11,8 @@ import LogOut from './screens/LogOut';
 import Sellerdash from './screens/Sellerdash';
 import Settings from './screens/Settings';
 import Myorders from './screens/Myorders';
+import Payment from './screens/Payment';
+import Completion from './screens/Completion';
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
               <Route path='/sellerDash/:page' element={<Sellerdash/>}/>
               <Route exact path='/settings' element={<Settings/>}/>
               <Route path='/myOrders' element={<Myorders/>}/>
+              <Route path='/payment' element={<Payment/>}/>
+              <Route path='/completion' element={<Completion/>}/>
             </Routes>
             </AccountProvider>
       </div>
