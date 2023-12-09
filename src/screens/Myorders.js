@@ -78,7 +78,7 @@ function Myorders() {
                                         <TableCell>{order.status}</TableCell>
                                         <TableCell>{order.address}</TableCell>
                                         <TableCell>{order.qty}</TableCell>
-                                        <TableCell>{order.price}</TableCell>
+                                        <TableCell>{'₹'+order.price}</TableCell>
                                         <TableCell>
                                             <button className="btn btn-success">Track</button>
                                             <button className="btn btn-danger" onClick={() => cancelOrder(order._id)}>Cancel</button>

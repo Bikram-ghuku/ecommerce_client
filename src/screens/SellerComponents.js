@@ -6,17 +6,43 @@ import { LineChart } from '@mui/x-charts';
 
 function Dashboard() {
     const [totOrders, setTotOrders] = React.useState(0);
+    const [actOrders, setActOrders] = React.useState(0);
     const [totProducts, setTotProducts] = React.useState(0);
     const [totRevenue, setTotRevenue] = React.useState(0);
     useEffect(() => {
         fetch(process.env.REACT_APP_SERVER_ADD+'getOrders', {
+            method: "POST",
+            body: JSON.stringify({uid: localStorage.getItem('accId')}),
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json()).then((data) => {
+            setActOrders(data.length);
+        }).catch((err) => {
+            console.log(err)
+        })
+
+        fetch(process.env.REACT_APP_SERVER_ADD+'getProducts', {
             method: "POST",
             body: JSON.stringify({sid: localStorage.getItem('accId')}),
             headers:{
                 'Content-Type': 'application/json'
             }
         }).then(res => res.json()).then((data) => {
-            setTotOrders(data.length);
+            setTotProducts(data.length);
+        }).catch((err) => {
+            console.log(err)
+        })
+
+        fetch(process.env.REACT_APP_SERVER_ADD+'getSeller', {
+            method: "POST",
+            body: JSON.stringify({sid: localStorage.getItem('accId')}),
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json()).then((data) => {
+            setTotRevenue(data.totSales);
+            setTotOrders(data.totOrders);
         }).catch((err) => {
             console.log(err)
         })
@@ -30,45 +56,40 @@ function Dashboard() {
                 <div className="sep"><div className="hRule"></div></div>
                 <div className="sd-dash-body">
                     <div className="sd-dash-body-card">
+                        <div className="sd-dash-body-card-title">Active Orders</div>
+                        <div className="sd-dash-body-card-value">{actOrders}</div>
+                    </div>
+                    <div className="sd-dash-body-card">
                         <div className="sd-dash-body-card-title">Total Orders</div>
                         <div className="sd-dash-body-card-value">{totOrders}</div>
+                    </div>
+                    <div className="sd-dash-body-card">
+                        <div className="sd-dash-body-card-title">Total Revenue</div>
+                        <div className="sd-dash-body-card-value">{'₹'+totRevenue}</div>
                     </div>
                     <div className="sd-dash-body-card">
                         <div className="sd-dash-body-card-title">Total Products</div>
                         <div className="sd-dash-body-card-value">{totProducts}</div>
                     </div>
-                    <div className="sd-dash-body-card">
-                        <div className="sd-dash-body-card-title">Total Revenue</div>
-                        <div className="sd-dash-body-card-value">{totRevenue}</div>
-                    </div>
                 </div>
                 <div className="sep"><div className="hRule"></div></div>
                 <div className="sd-dash-graph">
-                    <LineChart 
-                        sx={{
-                            '& .MuiLineElement-root': {
-                              strokeDasharray: '10 5',
-                              strokeWidth: 4,
-                            },
-                            '& .MuiAreaElement-series-series1': {
-                              fill: "url('#myGradient')",
-                            },
-                        }}
-                        xAxis={[{data:[1, 2, 3]}]}
+                    <LineChart
+                        dataset={[{x: 0, ord: 0, rev: 0}, {x: 1, ord: 1, rev: 3}, {x: 2, ord: 2, rev: 5}]} 
+                        xAxis={[{dataKey:'x'}]}
                         series={[{
                             id: 'series1',
-                            data:[10, 11, 13],
-                            area: true
+                            dataKey: 'ord',
+                            label: 'Orders',
+                        },
+                        {
+                            id: 'series2',
+                            dataKey: 'rev',
+                            label: 'Revenue'
                         }]}
                         height={500}
                         width={1000}
                     >
-                        <defs>
-                            <linearGradient id="myGradient" gradientTransform="rotate(90)">
-                            <stop offset="5%" stopColor="#4adede" />
-                            <stop offset="95%" stopColor="#787ff6" />
-                            </linearGradient>
-                        </defs>
                     </LineChart>
                 </div>
             </div>
@@ -186,7 +207,7 @@ function Products() {
     useEffect(() => {
         fetch(process.env.REACT_APP_SERVER_ADD+'getProducts', {
             method: "POST",
-            body: JSON.stringify({uid: localStorage.getItem('accId')}),
+            body: JSON.stringify({sid: localStorage.getItem('accId')}),
             headers:{
                 'Content-Type': 'application/json'
             }
