@@ -42,7 +42,7 @@ function Payment() {
 
     return (
         <div className='bodyD'>
-            <h1>React Stripe and the Payment Element</h1>
+            <h1>RPayment Gateway</h1>
             {stripePromise && clientSecret && (
                 <Elements stripe={ stripePromise } options={options}>
                     <CheckoutForm/>
