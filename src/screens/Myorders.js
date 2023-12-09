@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import './css/Myorders.css'
-import { Box, CircularProgress, Tab, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
+import { Box, CircularProgress, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
 
 function cancelOrder(id) {
     fetch(process.env.REACT_APP_SERVER_ADD+"cancelOrder", {
