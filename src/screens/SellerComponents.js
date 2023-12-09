@@ -45,11 +45,31 @@ function Dashboard() {
                 <div className="sep"><div className="hRule"></div></div>
                 <div className="sd-dash-graph">
                     <LineChart 
+                        sx={{
+                            '& .MuiLineElement-root': {
+                              strokeDasharray: '10 5',
+                              strokeWidth: 4,
+                            },
+                            '& .MuiAreaElement-series-series1': {
+                              fill: "url('#myGradient')",
+                            },
+                        }}
                         xAxis={[{data:[1, 2, 3]}]}
-                        series={[{data:[10, 11, 13]}]}
+                        series={[{
+                            id: 'series1',
+                            data:[10, 11, 13],
+                            area: true
+                        }]}
                         height={500}
                         width={1000}
-                    />
+                    >
+                        <defs>
+                            <linearGradient id="myGradient" gradientTransform="rotate(90)">
+                            <stop offset="5%" stopColor="#4adede" />
+                            <stop offset="95%" stopColor="#787ff6" />
+                            </linearGradient>
+                        </defs>
+                    </LineChart>
                 </div>
             </div>
         </div>
