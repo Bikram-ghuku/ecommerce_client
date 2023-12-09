@@ -195,7 +195,7 @@ function ShoppingCart() {
                           	<div className='finalAmtL'><h5>TOTAL COST</h5></div>
                           	<div className='finalAmtR'><h5>₹{totSum > discount ? totSum - discount : totSum}</h5></div>
                           	<div className='checkOutBtn'>
-                            	<button className='btn btn-secondary' style={{width: "100%", backgroundColor:"#1e2f97"}} onClick={() => orderItems()} disabled={totSum==0}>
+                            	<button className='btn btn-secondary' style={{width: "100%", backgroundColor:"#1e2f97"}} onClick={() => orderItems()} disabled={totSum===0}>
                               		<h5>CHECKOUT</h5>
                             	</button>
                           	</div>

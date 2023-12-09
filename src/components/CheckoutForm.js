@@ -37,7 +37,7 @@ export default function CheckoutForm() {
 
     return (
         <form id="payment-form" onSubmit={handleSubmit}>
-            <PaymentElement id="payment-element" />
+            <PaymentElement id="payment-element" options={{layout:"tabs"}}/>
             <button disabled={isProcessing || !stripe || !elements} id="submit" className="btn btn-primary">
                 <span id="button-text">
                     {isProcessing ? "Processing ... " : "Pay now"}

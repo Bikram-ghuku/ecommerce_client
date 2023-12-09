@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect} from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import Navbar from '../components/Navbar';
 import { CheckCircleOutline } from '@mui/icons-material';
@@ -25,10 +25,11 @@ function Completion() {
 	const [searchParams] = useSearchParams();
 	const paymentIntent = searchParams.get("payment_intent");
 	useEffect(() => {
-		if(paymentIntent && localStorage.getItem("funCalled") != "true"){
+		if(paymentIntent && localStorage.getItem("funCalled") !== "true"){
 			confirmOrder(paymentIntent);
 			localStorage.setItem("funCalled", true);
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 	return (
 		<>

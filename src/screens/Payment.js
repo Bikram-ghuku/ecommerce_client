@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
-import { Elements, PaymentElement } from '@stripe/react-stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 import CheckoutForm from '../components/CheckoutForm';
 
 function Payment() {
@@ -31,15 +31,24 @@ function Payment() {
           })
           .catch(err => console.log(err))
     }, [])
+
+    const appearance = {
+        theme: 'stripe',
+    };
+    const options = {
+        clientSecret,
+        appearance,
+    };
+
     return (
-        <>
+        <div className='bodyD'>
             <h1>React Stripe and the Payment Element</h1>
             {stripePromise && clientSecret && (
-                <Elements stripe={ stripePromise } options={{ clientSecret }}>
+                <Elements stripe={ stripePromise } options={options}>
                     <CheckoutForm/>
                 </Elements>
             )}
-        </>
+        </div>
     )
 }
 
