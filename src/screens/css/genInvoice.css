@@ -7,8 +7,8 @@
 
 .bill-wrapper{
     outline: solid 1px black;
-    height: 85vh;
-    width: 30vw;
+    height: 842px;
+    width: 595px;
     background-color: white;
 }
 
@@ -49,6 +49,7 @@
 }
 
 .bill-table{
+    padding-top: 5vh;
     padding-bottom: 5vh;
 }
 

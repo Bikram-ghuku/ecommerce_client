@@ -3,12 +3,32 @@ import Navbar from '../components/Navbar'
 import { useParams } from 'react-router-dom'
 import favicon from '../ico.png'
 import './css/genInvoice.css'
-import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
+import { CircularProgress, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
+import { jsPDF} from 'jspdf'
+import { toPng } from 'html-to-image'
 
+
+function printBill() {
+    const printContents = document.getElementsByClassName("bill-wrapper");
+    const printEle = printContents[0]
+    toPng(printEle).then((dataUrl) => {
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const imgProps= pdf.getImageProperties(dataUrl);
+
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+        pdf.addImage(dataUrl, 'PNG', 5, 5, pdfWidth-10, pdfHeight-10);
+        
+        pdf.save("invoice.pdf");
+    })
+
+}
 
 function Geninvoice() {
     const {oid} = useParams()
     const [billDetails, setBillDetails] = useState({})
+    const [detLoaded, setDetLoaded] = useState(false)
     useEffect(() => {
         fetch(process.env.REACT_APP_SERVER_ADD+'getBill', {
             method: "POST",
@@ -21,11 +41,12 @@ function Geninvoice() {
         .then(data => {
             setBillDetails(data)
             console.log(data)
+            setDetLoaded(true)
         }).catch(err => {
             console.log(err)
         }
         )
-    })
+    }, [])
   return (
     <div>
         <Navbar/>
@@ -78,6 +99,7 @@ function Geninvoice() {
                         </TableBody>
                     </Table>
                 </div>
+                {!detLoaded ? <CircularProgress/> : null}
                 <div className="bill-total">
                     <div className="bill-total-amt">
                         Total Amount: <div className="bill-tot-amt-value">{"₹"+billDetails.price*billDetails.qty}</div>
@@ -86,6 +108,7 @@ function Geninvoice() {
                 </div>
             </div>
         </div>
+        <button onClick={() => printBill()} className='btn btn-primary'>Print</button>
     </div>
   )
 }
