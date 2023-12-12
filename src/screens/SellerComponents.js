@@ -181,7 +181,7 @@ function Orders() {
                             <TableBody>
                                 {orders.map((order) => (
                                     <TableRow key={order._id}>
-                                        <TableCell>{order._id}</TableCell>
+                                        <TableCell><Link to={"/genInvoice/"+order._id}>{order._id}</Link></TableCell>
                                         <TableCell>{order.pdtName}</TableCell>
                                         <TableCell>{order.qty}</TableCell>
                                         <TableCell>{order.stat}</TableCell>

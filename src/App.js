@@ -13,6 +13,7 @@ import Settings from './screens/Settings';
 import Myorders from './screens/Myorders';
 import Payment from './screens/Payment';
 import Completion from './screens/Completion';
+import Geninvoice from './screens/Geninvoice';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
               <Route path='/myOrders' element={<Myorders/>}/>
               <Route path='/payment' element={<Payment/>}/>
               <Route path='/completion' element={<Completion/>}/>
+              <Route path='/genInvoice/:oid' element={<Geninvoice/>}/>
             </Routes>
             </AccountProvider>
       </div>
