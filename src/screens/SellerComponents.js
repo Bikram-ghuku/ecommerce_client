@@ -1,4 +1,4 @@
-import { TableRow, Table, TableCell, TableHead, TableBody, Box, TextField, Select, MenuItem, InputLabel, FormControl, CircularProgress, Button } from '@mui/material'
+import { TableRow, Table, TableCell, TableHead, TableBody, Box, TextField, Select, MenuItem, InputLabel, FormControl, CircularProgress, Button, Modal } from '@mui/material'
 import React, { useEffect } from 'react'
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom';
@@ -130,6 +130,33 @@ function deleteOrder(id) {
 function Orders() {
     const [orders, setOrders] = React.useState([]);
     const [gotOrders, setGotOrders] = React.useState(false);
+    const [openModal, setOpenModal] = React.useState(false);
+    const [currentOrder, setCurrentOrder] = React.useState();
+    const [currStatus, setCurrStatus] = React.useState();
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    };
+
+    const handleSADD = (e) =>{
+        e.preventDefault();
+        setCurrStatus(e.target.value);
+    }   
+
+    const closeModal = () => {
+        setOpenModal(false);
+        setCurrentOrder();
+        setCurrStatus();
+    }
+
     useEffect(() => {
         fetch(process.env.REACT_APP_SERVER_ADD+'getOrders', {
             method: "POST",
@@ -142,20 +169,48 @@ function Orders() {
             setGotOrders(true);
             var orderCP = data;
             for(var i = 0; i < orderCP.length; i++) {
-                if(orderCP[i].status === 'Pending') {
+                if(orderCP[i].status.toLowerCase() === 'pending') {
                     orderCP[i].stat = <Box sx={{color: 'warning.main'}}>Pending</Box>
-                } else if(orderCP[i].status === 'delivered') {
+                } else if(orderCP[i].status.toLowerCase() === 'delivered') {
                     orderCP[i].stat = <Box sx={{color: 'success.main'}}>Delivered</Box>
                 } else if(orderCP[i].status.toLowerCase() === 'cancelled') {
-                    orderCP[i].stat = <Box sx={{color: 'error.main'}}>cancelled</Box>
-                } else if(orderCP[i].status === 'shipped') {
-                    orderCP[i].stat = <Box sx={{color: 'info.main'}}>Shipped</Box>
+                    orderCP[i].stat = <Box sx={{color: 'error.main'}}>Cancelled</Box>
+                } else if(orderCP[i].status.toLowerCase() === 'delivering') {
+                    orderCP[i].stat = <Box sx={{color: 'info.main'}}>Delivering</Box>
+                }else{
+                    orderCP[i].stat = <Box sx={{color: 'primary.main'}}>Preparing</Box>
                 }
             }
             setOrders(orderCP);
         });
         
     }, [])
+
+    const openOrderU = (id) => {
+        setOpenModal(true);
+        setCurrentOrder(id);
+        for(var i = 0; i < orders.length; i++) {
+            if(orders[i]._id === id) {
+                setCurrStatus(orders[i].status);
+            }
+        }
+    }
+
+    const updateOrder = () => {
+        setOpenModal(false);
+        console.log(currentOrder, currStatus);
+        fetch(process.env.REACT_APP_SERVER_ADD+'updateOrder', {
+            method: "POST",
+            body: JSON.stringify({oid: currentOrder, status: currStatus}),
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json()).then((data) => {
+            if(data.code === 'ok') {
+                window.location.reload();
+            }
+        });
+    }
     return (
         <div className='sd-p-main'>
             <div className="sd-p">
@@ -188,14 +243,45 @@ function Orders() {
                                         <TableCell>{order.address}</TableCell>
                                         <TableCell>{order.user}</TableCell>
                                         <TableCell>
-                                            {order.status.toLowerCase() === "cancelled" ? <></> : <button className='btn btn-primary' >Update status</button> }
-                                            <button className='btn btn-danger' onClick={() => deleteOrder(order._id)}>Delete order</button>
+                                            {order.status.toLowerCase() === "cancelled"? <></> :
+                                             <button className='btn btn-primary' onClick={() => openOrderU(order._id)}>Update status</button> }
+                                            {order.status.toLowerCase() === "cancelled" || order.status.toLowerCase() === "pending" ? 
+                                            <button className='btn btn-danger' onClick={() => deleteOrder(order._id)}>Delete order</button> : null}
                                         </TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
                         </Table>
                         {!gotOrders ? <CircularProgress sx={{height: "90vh"}}/> : ""}
+                        <Modal open={openModal} onClose={closeModal} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+                            <Box sx={style}>
+                            <div className="sd-p-modal">
+                                <h2 className="sd-p-modal-title">Update Order Status</h2>
+                                <div className="sd-p-modal-body">
+                                    <h5 className="sd-p-modal-body-label">Order Id: </h5>
+                                    <div className="sd-p-modal-body-value" style={{display:"inline-block"}}>{currentOrder}</div>
+                                    <br/>
+                                    <h5 className="sd-p-modal-body-label">Status: </h5>
+                                    <div className="sd-p-modal-body-value">
+                                        <FormControl>
+                                            <InputLabel id="selectLabel">Status</InputLabel>
+                                            <Select label='Status' labelId='selectLabel' defaultValue={currStatus} onChange={handleSADD}>
+                                                <MenuItem value={"pending"}>Pending</MenuItem>
+                                                <MenuItem value={"preparing"}>Preparing</MenuItem>
+                                                <MenuItem value={"delivering"}>Delivering</MenuItem>
+                                                <MenuItem value={"delivered"}>Delivered</MenuItem>
+                                                <MenuItem value={"cancelled"}>Cancelled</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div className="sd-p-modal-footer">
+                                    <button className="btn btn-primary" onClick={() => updateOrder()}>Update</button>
+                                </div>
+                            </div>
+                            </Box>
+                        </Modal>
                     </div>
                 </div>
             </div>
