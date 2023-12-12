@@ -225,6 +225,7 @@ function Orders() {
                             <TableHead>
                                 <TableRow>
                                     <TableCell><b>OrderId</b></TableCell>
+                                    <TableCell><b>PaymentId</b></TableCell>
                                     <TableCell><b>Product Name</b></TableCell>
                                     <TableCell><b>Quantity</b></TableCell>
                                     <TableCell><b>Status</b></TableCell>
@@ -237,6 +238,7 @@ function Orders() {
                                 {orders.map((order) => (
                                     <TableRow key={order._id}>
                                         <TableCell><Link to={"/genInvoice/"+order._id}>{order._id}</Link></TableCell>
+                                        <TableCell>{order.paymentId}</TableCell>
                                         <TableCell>{order.pdtName}</TableCell>
                                         <TableCell>{order.qty}</TableCell>
                                         <TableCell>{order.stat}</TableCell>
