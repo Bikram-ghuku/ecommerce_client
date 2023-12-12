@@ -191,7 +191,7 @@ function Orders() {
         setCurrentOrder(id);
         for(var i = 0; i < orders.length; i++) {
             if(orders[i]._id === id) {
-                setCurrStatus(orders[i].status);
+                setCurrStatus(orders[i].status.toLowerCase());
             }
         }
     }

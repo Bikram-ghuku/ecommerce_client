@@ -36,14 +36,16 @@ function Myorders() {
                 setOrders(data)
                 var orderCP = data;
                 for(var i = 0; i < orderCP.length; i++) {
-                    if(orderCP[i].status === 'Pending') {
-                        orderCP[i].status = <Box sx={{color: 'warning.main'}}>Pending</Box>
-                    } else if(orderCP[i].status === 'delivered') {
-                        orderCP[i].status = <Box sx={{color: 'success.main'}}>Delivered</Box>
+                    if(orderCP[i].status.toLowerCase() === 'pending') {
+                        orderCP[i].stat = <Box sx={{color: 'warning.main'}}>Pending</Box>
+                    } else if(orderCP[i].status.toLowerCase() === 'delivered') {
+                        orderCP[i].stat = <Box sx={{color: 'success.main'}}>Delivered</Box>
                     } else if(orderCP[i].status.toLowerCase() === 'cancelled') {
-                        orderCP[i].status = <Box sx={{color: 'error.main'}}>cancelled</Box>
-                    } else if(orderCP[i].status === 'shipped') {
-                        orderCP[i].status = <Box sx={{color: 'info.main'}}>Shipped</Box>
+                        orderCP[i].stat = <Box sx={{color: 'error.main'}}>Cancelled</Box>
+                    } else if(orderCP[i].status.toLowerCase() === 'delivering') {
+                        orderCP[i].stat = <Box sx={{color: 'info.main'}}>Delivering</Box>
+                    }else{
+                        orderCP[i].stat = <Box sx={{color: 'primary.main'}}>Preparing</Box>
                     }
                 }
             setOrders(orderCP);
@@ -75,13 +77,13 @@ function Myorders() {
                                     <TableRow>
                                         <TableCell>{order._id}</TableCell>
                                         <TableCell>{order.pdtName}</TableCell>
-                                        <TableCell>{order.status}</TableCell>
+                                        <TableCell>{order.stat}</TableCell>
                                         <TableCell>{order.address}</TableCell>
                                         <TableCell>{order.qty}</TableCell>
                                         <TableCell>{'₹'+order.price}</TableCell>
                                         <TableCell>
-                                            <button className="btn btn-success">Track</button>
-                                            <button className="btn btn-danger" onClick={() => cancelOrder(order._id)}>Cancel</button>
+                                            {order.status === "delivering"? <button className="btn btn-success">Track</button> : null}
+                                            {order.status === "Pending" ? <button className="btn btn-danger" onClick={() => cancelOrder(order._id)}>Cancel</button> : null}
                                         </TableCell>
                                     </TableRow>
                                 ))}
