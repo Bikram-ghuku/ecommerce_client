@@ -14,8 +14,10 @@ import Myorders from './screens/Myorders';
 import Payment from './screens/Payment';
 import Completion from './screens/Completion';
 import Geninvoice from './screens/Geninvoice';
+import Cookies from 'universal-cookie';
 
 function App() {
+  const cookie = new Cookies();
   return (
     <Router>
       <div className="App">
@@ -28,7 +30,9 @@ function App() {
               <Route exact path='/addCart/:itemId' element={<AddCart/>} />
               <Route exact path='/registerSeller' element={<SellerAcc/>}/>
               <Route exact path='/logout' element={<LogOut/>}/>
-              <Route path='/sellerDash/:page' element={<Sellerdash/>}/>
+              {cookie.get("type") === "seller" ? <>
+                <Route path='/sellerDash/:page' element={<Sellerdash/>}/>
+              </>: null}
               <Route exact path='/settings' element={<Settings/>}/>
               <Route path='/myOrders' element={<Myorders/>}/>
               <Route path='/payment' element={<Payment/>}/>

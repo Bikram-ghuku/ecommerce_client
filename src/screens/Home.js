@@ -36,7 +36,7 @@ function Home() {
     <>
         <Navbar/>
         <h1>{res}</h1>
-        {respitem.length === 0 ? <CircularProgress /> : ""}
+        {respitem.length === 0 ? <><CircularProgress /><br/>*Refresh page if loading for too long</> : ""}
         <div className='itemsCont card-columns'>
             {respitem.map((items, index) => (
                 <div className='cardParent' style={items.dispType==='normal' ? {width: "20vw", paddingLeft:"5vw", display:"inline-grid"} : {width:"95vw", paddingLeft:"5vw"}} key={index}>
