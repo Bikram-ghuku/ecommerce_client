@@ -30,7 +30,7 @@ function App() {
               <Route exact path='/addCart/:itemId' element={<AddCart/>} />
               <Route exact path='/registerSeller' element={<SellerAcc/>}/>
               <Route exact path='/logout' element={<LogOut/>}/>
-              {cookie.get("type").toLowerCase() === "seller" ? <>
+              {cookie.get("type") === "Seller" ? <>
                 <Route path='/sellerDash/:page' element={<Sellerdash/>}/>
               </>: null}
               <Route exact path='/settings' element={<Settings/>}/>
