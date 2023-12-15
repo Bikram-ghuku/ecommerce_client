@@ -14,33 +14,29 @@ import Myorders from './screens/Myorders';
 import Payment from './screens/Payment';
 import Completion from './screens/Completion';
 import Geninvoice from './screens/Geninvoice';
-import Cookies from 'universal-cookie';
 
 function App() {
-  const cookie = new Cookies();
   return (
     <Router>
-      <div className="App">
-          <AccountProvider>
-            <Routes>
-              <Route exact path='/login' element={<Login/>}/>
-              <Route exact path='/' element={<Home/>}/>
-              <Route exact path='/register' element={<Register/>}/>
-              <Route exact path='/shoppingCart' element={<ShoppingCart/>}/>
-              <Route exact path='/addCart/:itemId' element={<AddCart/>} />
-              <Route exact path='/registerSeller' element={<SellerAcc/>}/>
-              <Route exact path='/logout' element={<LogOut/>}/>
-              {cookie.get("type") === "Seller" ? <>
-                <Route path='/sellerDash/:page' element={<Sellerdash/>}/>
-              </>: null}
-              <Route exact path='/settings' element={<Settings/>}/>
-              <Route path='/myOrders' element={<Myorders/>}/>
-              <Route path='/payment' element={<Payment/>}/>
-              <Route path='/completion' element={<Completion/>}/>
-              <Route path='/genInvoice/:oid' element={<Geninvoice/>}/>
-            </Routes>
-            </AccountProvider>
-      </div>
+    	<div className="App">
+        	<AccountProvider>
+            	<Routes>
+              		<Route exact path='/login' element={<Login/>}/>
+              		<Route exact path='/' element={<Home/>}/>
+              		<Route exact path='/register' element={<Register/>}/>
+              		<Route exact path='/shoppingCart' element={<ShoppingCart/>}/>
+              		<Route exact path='/addCart/:itemId' element={<AddCart/>} />
+              		<Route exact path='/registerSeller' element={<SellerAcc/>}/>
+              		<Route exact path='/logout' element={<LogOut/>}/>
+              		<Route path='/sellerDash/:page' element={<Sellerdash/>}/>
+              		<Route exact path='/settings' element={<Settings/>}/>
+              		<Route path='/myOrders' element={<Myorders/>}/>
+              		<Route path='/payment' element={<Payment/>}/>
+              		<Route path='/completion' element={<Completion/>}/>
+              		<Route path='/genInvoice/:oid' element={<Geninvoice/>}/>
+            	</Routes>
+          	</AccountProvider>
+      	</div>
     </Router>
   );
 }
