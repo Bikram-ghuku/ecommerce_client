@@ -43,7 +43,9 @@ function Home() {
                     <div className='card border-dark' style={{boxShadow:"5px 10px 18px #888888"}}>
                         <div className='card-header'>{items.pdtName}</div>
                         <br/>
-                        <img src={items.img} className='card-img-top' alt={items.pdtName} style={{height:"10vh", width: "10vw", alignSelf:"center"}}/>
+                        <div className="card-img-wrapper" style={{height:"20vh", width:"20vh", alignSelf:"center", display:"flex"}}>
+                            <img src={items.img} className='card-img-top' alt={items.pdtName}/>
+                        </div>
                         <div className='card-body'>
                             <h5 className='card-title text-center'>{items.pdtName}</h5>
                             <p className='card-text'>{items.desc}</p>
