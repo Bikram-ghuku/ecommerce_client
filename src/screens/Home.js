@@ -3,12 +3,13 @@ import Navbar from '../components/Navbar'
 import Cookies from 'universal-cookie/cjs/Cookies';
 import { AccountContext } from '../context/AccountProvider';
 import { Link } from 'react-router-dom';
-import { CircularProgress, Rating } from '@mui/material';
+import { CircularProgress, Rating, TextField } from '@mui/material';
 
 function Home() {
     const {account} = useContext(AccountContext);
     const [respitem, setResitem] = useState([]);
     const [seller, setSeller] = useState({});
+    const [finalRes, setFinalRes] = useState([]);
     var res;
     var cookie = new Cookies();
     var accCookie = cookie.get('uname');
@@ -24,7 +25,10 @@ function Home() {
   useEffect(() => {
     fetch(process.env.REACT_APP_SERVER_ADD+'items', {method: "GET"})
         .then(response => response.json())
-        .then(data => setResitem(data))
+        .then(data => {
+            setFinalRes(data)
+            setResitem(data)
+        })
         .catch(err => console.log(err))
 
     fetch(process.env.REACT_APP_SERVER_ADD+'seller', {method: "GET"})
@@ -32,13 +36,32 @@ function Home() {
         .then(data => setSeller(data))
         .catch(err => console.log(err))
   }, []);
+
+    const handleSearch = (e) => {
+        console.log(e.target.value)
+        if(e.target.value === ""){
+            setFinalRes(respitem);
+        }else{
+            const filteredItems = respitem.filter((item) => {
+                return item.pdtName.toLowerCase().includes(e.target.value.toLowerCase());
+            });
+            if(filteredItems.length !== 0){
+                setFinalRes(filteredItems);
+            }
+            
+        }
+    }
+
     return (
     <>
         <Navbar/>
         <h1>{res}</h1>
+        <div className="searchBar" style={{position:"absolute", top:"1vh", left:"20vw"}}>
+            <TextField id="outlined-basic" label="Search" variant="outlined" style={{width:"50vw", backgroundColor:"#fff", borderRadius: "10px"}} onChange={handleSearch}/>
+        </div>
         {respitem.length === 0 ? <><CircularProgress /><br/>*Refresh page if loading for too long</> : ""}
         <div className='itemsCont card-columns'>
-            {respitem.map((items, index) => (
+            {finalRes.map((items, index) => (
                 <div className='cardParent' style={items.dispType==='normal' ? {width: "20vw", paddingLeft:"5vw", display:"inline-grid"} : {width:"95vw", paddingLeft:"5vw"}} key={index}>
                     <div className='card border-dark' style={{boxShadow:"5px 10px 18px #888888"}}>
                         <div className='card-header'>{items.pdtName}</div>
