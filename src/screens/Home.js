@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar'
 import Cookies from 'universal-cookie/cjs/Cookies';
 import { AccountContext } from '../context/AccountProvider';
 import { Link } from 'react-router-dom';
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, Rating } from '@mui/material';
 
 function Home() {
     const {account} = useContext(AccountContext);
@@ -53,6 +53,8 @@ function Home() {
                                 ))}
                             </ul>
                             <p className='card-text'><h5>{'₹'+items.cost}</h5></p>
+                            <Rating value={items.rating} name='read-only' readOnly/>
+                            <br/>
                             {loggedin ? <Link to={"addCart/"+items._id} className='btn btn-primary'>Add to ShoppingCart</Link> : "Login To Buy"}
                             <br/>
                             <p className='card-text'>Seller: {seller[items.seller]}</p>

@@ -1,4 +1,4 @@
-import { TableRow, Table, TableCell, TableHead, TableBody, Box, TextField, Select, MenuItem, InputLabel, FormControl, CircularProgress, Button, Modal } from '@mui/material'
+import { TableRow, Table, TableCell, TableHead, TableBody, Box, TextField, Select, MenuItem, InputLabel, FormControl, CircularProgress, Button, Modal, Rating } from '@mui/material'
 import React, { useEffect } from 'react'
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom';
@@ -341,6 +341,7 @@ function Products() {
                                     <TableCell><b>Price</b></TableCell>
                                     <TableCell><b>Actions</b></TableCell>
                                     <TableCell><b>Display</b></TableCell>
+                                    <TableCell><b>Ratings</b></TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -352,6 +353,7 @@ function Products() {
                                         <TableCell>{'₹' + product.cost}</TableCell>
                                         <TableCell><button className="btn btn-danger" onClick={() => delPdt(product._id)}>Delete</button></TableCell>
                                         <TableCell>{product.dispType}</TableCell>
+                                        <TableCell><Rating value={product.rating} name="read-only" readOnly/></TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
