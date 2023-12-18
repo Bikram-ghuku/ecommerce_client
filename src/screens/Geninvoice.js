@@ -8,7 +8,7 @@ import { jsPDF} from 'jspdf'
 import { toPng } from 'html-to-image'
 
 
-function printBill() {
+function printBill(oid) {
     const printContents = document.getElementsByClassName("bill-wrapper");
     const printEle = printContents[0]
     toPng(printEle).then((dataUrl) => {
@@ -20,7 +20,7 @@ function printBill() {
 
         pdf.addImage(dataUrl, 'PNG', 5, 5, pdfWidth-10, pdfHeight-10);
         
-        pdf.save("invoice.pdf");
+        pdf.save("invoice_"+oid+".pdf");
     })
 
 }
@@ -109,7 +109,7 @@ function Geninvoice() {
                 </div>
             </div>
         </div>
-        <button onClick={() => printBill()} className='btn btn-primary'>Print</button>
+        <button onClick={() => printBill(oid)} className='btn btn-primary'>Print</button>
     </div>
   )
 }
