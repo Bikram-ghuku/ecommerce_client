@@ -23,7 +23,7 @@ function Home() {
         loggedin = false;
     }
   useEffect(() => {
-    fetch(process.env.REACT_APP_SERVER_ADD+'items', {method: "GET"})
+    fetch(process.env.REACT_APP_SERVER_ADD+'products/items', {method: "GET"})
         .then(response => response.json())
         .then(data => {
             setFinalRes(data)
