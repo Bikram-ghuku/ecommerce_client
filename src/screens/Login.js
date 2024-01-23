@@ -25,7 +25,7 @@ function Login() {
 	const handleSubmit = async (e) =>{
 		e.preventDefault();
 		setMsg("Logging in...")
-		const response = await fetch(process.env.REACT_APP_SERVER_ADD+"login",{
+		const response = await fetch(process.env.REACT_APP_SERVER_ADD+"user/login",{
 			method: "POST",
 			body: JSON.stringify(form),
 			headers:{
