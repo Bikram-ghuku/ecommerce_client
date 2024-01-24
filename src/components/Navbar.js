@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {Link} from 'react-router-dom';
 import { AccountContext } from '../context/AccountProvider';
 import Cookies from 'universal-cookie/cjs/Cookies';
@@ -36,18 +36,18 @@ function Navbar() {
   	var accCookie = cookie.get('uname');
   	var accVar = account.Uname
   	var accType = account.type || cookie.get('type');
-  	if(accVar || accCookie){
-    	fetch(process.env.REACT_APP_SERVER_ADD+"cartItems", {
-        	method: "POST",
-        	body: JSON.stringify({id: localStorage.getItem("accId")}),
-        	headers:{
-          		'Content-Type': 'application/json'
-        	}
-      	})
-      	.then(response => response.json())
-      	.then(data => setNItems(data.length))
-      	.catch(err => console.log(err))
-  	}
+	useEffect(() => {
+	  fetch(process.env.REACT_APP_SERVER_ADD+"cart/cartItems", {
+		method: "POST",
+		body: JSON.stringify({id: localStorage.getItem("accId")}),
+		headers:{
+			  'Content-Type': 'application/json'
+		}
+	  })
+	  .then(response => response.json())
+	  .then(data => setNItems(data.length))
+	  .catch(err => console.log(err))
+	}, [])
   
 	return (
     	<nav className="navbar navbar-expand-lg navbar-dark bg-primary">

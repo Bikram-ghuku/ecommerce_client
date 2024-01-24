@@ -18,7 +18,7 @@ function AddCart() {
     	})
     	.then(resp => resp.json())
     	.then(data =>{ 
-			if(data.code != "ok"){
+			if(data.code !== "ok"){
 				setSuccess(data.code)
 			}else{
 				setSuccess("")
