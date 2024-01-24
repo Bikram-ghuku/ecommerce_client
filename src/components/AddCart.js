@@ -9,7 +9,7 @@ function AddCart() {
 	const {itemId} = useParams();
 	const [success, setSuccess] = React.useState();
 	useEffect(() => {
-    	fetch(process.env.REACT_APP_SERVER_ADD+"addCartItems", {
+    	fetch(process.env.REACT_APP_SERVER_ADD+"cart/addCartItems", {
       		method: "POST",
       		body: JSON.stringify({"uid": localStorage.getItem('accId'), "pid": itemId}),
       		headers:{

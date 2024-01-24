@@ -10,7 +10,7 @@ function Settings() {
     const [addresses, setAddresses] = React.useState([]);
 
     useEffect(() => {
-        fetch(process.env.REACT_APP_SERVER_ADD+'getAddress', {
+        fetch(process.env.REACT_APP_SERVER_ADD+'address/getAddress', {
             method: "POST",
             body: JSON.stringify({uid: localStorage.getItem('accId')}),
             headers:{
@@ -27,7 +27,7 @@ function Settings() {
     }
 
     const addAddress = () => {
-       fetch(process.env.REACT_APP_SERVER_ADD+'addAddress',{
+       fetch(process.env.REACT_APP_SERVER_ADD+'address/addAddress',{
             method: "POST",
             body: JSON.stringify(formData),
             headers:{

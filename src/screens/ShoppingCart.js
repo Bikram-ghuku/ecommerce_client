@@ -42,7 +42,7 @@ function ShoppingCart() {
     }
 
     useEffect(() => {
-      fetch(process.env.REACT_APP_SERVER_ADD+"cartItems", {
+      fetch(process.env.REACT_APP_SERVER_ADD+"cart/cartItems", {
           method: "POST",
           body: JSON.stringify({id: localStorage.getItem("accId")}),
           headers:{
@@ -56,7 +56,7 @@ function ShoppingCart() {
 		})
         .catch(err => console.log(err))
 
-        fetch(process.env.REACT_APP_SERVER_ADD+'getAddress', {
+        fetch(process.env.REACT_APP_SERVER_ADD+'address/getAddress', {
           method: "POST",
           body: JSON.stringify({uid: localStorage.getItem('accId')}),
           headers:{

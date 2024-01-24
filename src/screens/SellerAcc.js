@@ -24,7 +24,7 @@ function Register() {
         e.preventDefault();
         if(!form.name.includes(' ')) setMsg("Name should contain a space")
         else{
-            const response = await fetch(process.env.REACT_APP_SERVER_ADD+"register",{
+            const response = await fetch(process.env.REACT_APP_SERVER_ADD+"user/register",{
                 method: "POST",
                 body: JSON.stringify(form),
                 headers:{

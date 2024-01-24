@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import { CheckCircleOutline } from '@mui/icons-material';
 
 function confirmOrder(paymentIntent){
-    fetch(process.env.REACT_APP_SERVER_ADD+"addOrder", {
+    fetch(process.env.REACT_APP_SERVER_ADD+"/order/addOrder", {
 		method: "POST",
 		body: JSON.stringify({uid: localStorage.getItem("accId"), address: localStorage.getItem("address"), paymentIntent:paymentIntent}),
 		headers:{

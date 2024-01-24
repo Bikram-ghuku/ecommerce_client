@@ -4,7 +4,7 @@ import './css/Myorders.css'
 import { Box, CircularProgress, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
 
 function cancelOrder(id) {
-    fetch(process.env.REACT_APP_SERVER_ADD+"cancelOrder", {
+    fetch(process.env.REACT_APP_SERVER_ADD+"order/cancelOrder", {
         method: "POST",
         body: JSON.stringify({oid: id}),
         headers:{
@@ -23,7 +23,7 @@ function Myorders() {
     const [orders, setOrders] = useState([]);
     const [gotOrders, setGotOrders] = useState(false);
     useEffect(() => {
-        fetch(process.env.REACT_APP_SERVER_ADD+"myOrders", {
+        fetch(process.env.REACT_APP_SERVER_ADD+"order/myOrders", {
             method: "POST",
             body: JSON.stringify({uid: localStorage.getItem("accId")}),
             headers:{

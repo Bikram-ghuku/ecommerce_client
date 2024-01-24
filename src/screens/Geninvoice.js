@@ -30,7 +30,7 @@ function Geninvoice() {
     const [billDetails, setBillDetails] = useState({})
     const [detLoaded, setDetLoaded] = useState(false)
     useEffect(() => {
-        fetch(process.env.REACT_APP_SERVER_ADD+'getBill', {
+        fetch(process.env.REACT_APP_SERVER_ADD+'/payment/getBill', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

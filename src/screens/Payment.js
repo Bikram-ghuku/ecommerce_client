@@ -9,7 +9,7 @@ function Payment() {
     localStorage.setItem("funCalled", false);
 
     useEffect(() => {
-		fetch(process.env.REACT_APP_SERVER_ADD+"stripeConfig",)
+		fetch(process.env.REACT_APP_SERVER_ADD+"payment/stripeConfig",)
 		.then(async (t) => {
 			const publicKey  = await t.json();
 			setStripePromise(loadStripe(publicKey.key));
@@ -17,7 +17,7 @@ function Payment() {
 			console.log(err);
 		});
 
-        fetch(process.env.REACT_APP_SERVER_ADD+"createPaymentIntent", {
+        fetch(process.env.REACT_APP_SERVER_ADD+"payment/createPaymentIntent", {
             method: "POST",
             body: JSON.stringify({uid: localStorage.getItem('accId')}),
             headers:{

@@ -10,7 +10,7 @@ function Dashboard() {
     const [totProducts, setTotProducts] = React.useState(0);
     const [totRevenue, setTotRevenue] = React.useState(0);
     useEffect(() => {
-        fetch(process.env.REACT_APP_SERVER_ADD+'getOrders', {
+        fetch(process.env.REACT_APP_SERVER_ADD+'order/getOrders', {
             method: "POST",
             body: JSON.stringify({uid: localStorage.getItem('accId')}),
             headers:{
@@ -22,7 +22,7 @@ function Dashboard() {
             console.log(err)
         })
 
-        fetch(process.env.REACT_APP_SERVER_ADD+'getProducts', {
+        fetch(process.env.REACT_APP_SERVER_ADD+'products/getProducts', {
             method: "POST",
             body: JSON.stringify({sid: localStorage.getItem('accId')}),
             headers:{
@@ -34,7 +34,7 @@ function Dashboard() {
             console.log(err)
         })
 
-        fetch(process.env.REACT_APP_SERVER_ADD+'getSeller', {
+        fetch(process.env.REACT_APP_SERVER_ADD+'seller/getSeller', {
             method: "POST",
             body: JSON.stringify({sid: localStorage.getItem('accId')}),
             headers:{
@@ -99,7 +99,7 @@ function Dashboard() {
 
 function delPdt(id) {
     if(window.confirm('Are you sure you want to delete this product?') === false) return;
-    fetch(process.env.REACT_APP_SERVER_ADD+'delProduct', {
+    fetch(process.env.REACT_APP_SERVER_ADD+'products/delProduct', {
         method: "POST",
         body: JSON.stringify({pid: id}),
         headers:{
@@ -114,7 +114,7 @@ function delPdt(id) {
 
 function deleteOrder(id) {
     if(window.confirm('Are you sure you want to delete this order?') === false) return;
-    fetch(process.env.REACT_APP_SERVER_ADD+'delOrder', {
+    fetch(process.env.REACT_APP_SERVER_ADD+'order/delOrder', {
         method: "POST",
         body: JSON.stringify({oid: id}),
         headers:{
@@ -158,7 +158,7 @@ function Orders() {
     }
 
     useEffect(() => {
-        fetch(process.env.REACT_APP_SERVER_ADD+'getOrders', {
+        fetch(process.env.REACT_APP_SERVER_ADD+'order/getOrders', {
             method: "POST",
             body: JSON.stringify({uid: localStorage.getItem('accId')}),
             headers:{
@@ -199,7 +199,7 @@ function Orders() {
     const updateOrder = () => {
         setOpenModal(false);
         console.log(currentOrder, currStatus);
-        fetch(process.env.REACT_APP_SERVER_ADD+'updateOrder', {
+        fetch(process.env.REACT_APP_SERVER_ADD+'order/updateOrder', {
             method: "POST",
             body: JSON.stringify({oid: currentOrder, status: currStatus}),
             headers:{
@@ -295,7 +295,7 @@ function Products() {
     const [products, setProducts] = React.useState([]);
     const [gotPdts, setGotPdts] = React.useState(false);
     useEffect(() => {
-        fetch(process.env.REACT_APP_SERVER_ADD+'getProducts', {
+        fetch(process.env.REACT_APP_SERVER_ADD+'products/getProducts', {
             method: "POST",
             body: JSON.stringify({sid: localStorage.getItem('accId')}),
             headers:{
@@ -388,7 +388,7 @@ function AddProducts() {
 
     const handleSubmit = () => {
         setStatus('Adding Product...');
-        fetch(process.env.REACT_APP_SERVER_ADD+'addProduct', {
+        fetch(process.env.REACT_APP_SERVER_ADD+'products/addProduct', {
             method: "POST",
             body: JSON.stringify(products),
             headers:{

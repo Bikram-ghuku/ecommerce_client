@@ -31,7 +31,7 @@ function Home() {
         })
         .catch(err => console.log(err))
 
-    fetch(process.env.REACT_APP_SERVER_ADD+'seller', {method: "GET"})
+    fetch(process.env.REACT_APP_SERVER_ADD+'seller/getAllSellers', {method: "GET"})
         .then(response => response.json())
         .then(data => setSeller(data))
         .catch(err => console.log(err))
