@@ -99,7 +99,7 @@ function Dashboard() {
 
 function delPdt(id) {
     if(window.confirm('Are you sure you want to delete this product?') === false) return;
-    fetch(process.env.REACT_APP_SERVER_ADD+'products/delProduct', {
+    fetch(process.env.REACT_APP_SERVER_ADD+'products/delProducts', {
         method: "POST",
         body: JSON.stringify({pid: id}),
         headers:{
