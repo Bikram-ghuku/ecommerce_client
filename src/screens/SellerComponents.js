@@ -388,7 +388,7 @@ function AddProducts() {
 
     const handleSubmit = () => {
         setStatus('Adding Product...');
-        fetch(process.env.REACT_APP_SERVER_ADD+'products/addProduct', {
+        fetch(process.env.REACT_APP_SERVER_ADD+'products/addProducts', {
             method: "POST",
             body: JSON.stringify(products),
             headers:{
