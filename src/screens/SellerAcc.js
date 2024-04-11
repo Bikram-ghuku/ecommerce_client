@@ -24,7 +24,7 @@ function Register() {
         e.preventDefault();
         if(!form.name.includes(' ')) setMsg("Name should contain a space")
         else{
-            const response = await fetch(process.env.REACT_APP_SERVER_ADD+"register",{
+            const response = await fetch(process.env.REACT_APP_SERVER_ADD+"user/register",{
                 method: "POST",
                 body: JSON.stringify(form),
                 headers:{
@@ -61,7 +61,8 @@ function Register() {
                         <br/>
                             <button type="submit" className="btn btn-primary">Register</button>
                         <br/>
-                        <label className='info-box'>Already have an account? <Link to="/login">Login</Link></label>
+                        <label className='info-box'>Already have an account? <Link to="/login">Login</Link></label><br/>
+                        <label className='info-box'>Want to buy Items? <Link to="/register">Register</Link></label>
                     </form>
                 </div>
             </div>

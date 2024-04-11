@@ -4,6 +4,7 @@ import Inventory2Icon from '@mui/icons-material/Inventory2';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import RateReviewIcon from '@mui/icons-material/RateReview';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { Home } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
@@ -16,7 +17,8 @@ function Sidenav() {
         [<SaveAltIcon/> , 'Orders'], 
         [<Inventory2Icon/>, 'Products'], 
         [<MonetizationOnIcon/>, 'Revenue'], 
-        [<RateReviewIcon/>, 'Reviews']];
+        [<RateReviewIcon/>, 'Reviews'],
+        [<AddCircleOutlineIcon/>, 'addProduct']];
     return (
         <div className='drawer' style={{display:'flex', backgroundColor: 'red', width:'13vw'}}>
             <Drawer

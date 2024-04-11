@@ -53,5 +53,62 @@
 .sd-p-table{
     height: 65vh;
     overflow-y: scroll;
-    width: 80%;
+    width: 90%;
+}
+
+.sd-ap-grid{
+    padding-top: 10vh;
+    padding-left: 20vw;
+    height: 50vh;
+    width: 70vw;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+}
+
+.sd-inp-label{
+    grid-column: 1/span 1;
+}
+
+.sd-inp-field{
+    grid-column: 2/span 2;
+}
+
+.sd-dash-header-title{
+    padding-top: 1vh;
+    font-size: 5vh;
+    height: 7vh;
+    font-weight: 600;
+}
+
+.sd-dash-body{
+    height: 18vh;
+    width: 80vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.sd-dash-body-card{
+    height: 10vh;
+    width: 15vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    outline: solid #f0f0f0;
+    margin: 1vh;
+}
+
+.sd-dash-body-card-title, .sd-dash-body-card-value{
+    font-size: 3vh;
+    font-weight: 600;
+}
+
+.sd-dash-graph{
+    width: 83vw;
+    height: 62vh;
+    display: flex;
+    justify-content: center;
 }
