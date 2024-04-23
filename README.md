@@ -7,11 +7,11 @@
 
 <div align="center">
   <img src=https://github.com/Bikram-ghuku/ecommerce_client/assets/37508038/c4f056c1-bf59-4329-9380-4c70dd667b0d">
-  <h3 align=center">Eateries</h3>
+  <h1 align=center">Eateries</h1>
 </div>
 
 
-# React frontend for the MERN stack ecommerce website
+## React frontend for the MERN stack ecommerce website
 
 ### Method to setup in local system
 
